@@ -64,3 +64,29 @@ export interface Testimonial {
   journey: string;
   placeholder: true;
 }
+
+export type Mode = "train" | "night-train" | "ferry" | "coastal-ship" | "car" | "bus" | "flight";
+
+/** One connection between two places. Times are editable estimates, door to door on the vehicle. */
+export interface Leg {
+  id: string;
+  from: string;
+  to: string;
+  mode: Mode;
+  minutes: number;
+  /** Worth taking for the view alone. */
+  scenic?: boolean;
+  /** e.g. "Bergen Line" */
+  name?: string;
+  note?: string;
+  /** Months it runs, if seasonal. */
+  seasonal?: Month[];
+}
+
+/** A named slow route: a sequence of stops. */
+export interface SlowRoute {
+  id: string;
+  name: string;
+  stops: string[];
+  description: string;
+}
