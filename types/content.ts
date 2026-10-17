@@ -90,3 +90,18 @@ export interface SlowRoute {
   stops: string[];
   description: string;
 }
+
+/** Something the light makes possible in certain months. */
+export interface LightMoment {
+  id: string;
+  label: string;
+  months: Month[];
+  /** Where: "Above the Arctic Circle" */
+  where: string;
+  text: string;
+  journeySlugs: string[];
+  /** Experience ids (see /experiences). */
+  experienceIds: string[];
+  /** Where the season was checked. */
+  source?: string;
+}
