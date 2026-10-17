@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { PillLink } from "@/components/ui/Links";
 import { Tag } from "@/components/ui/Tag";
@@ -10,6 +9,7 @@ import { places } from "@/data/places";
 import { slowRoutes } from "@/data/routes";
 import { monthName } from "@/lib/format";
 import { planRoute, type PlannedLeg } from "@/lib/routing";
+import { useInitialUrlParams } from "@/lib/use-url-params";
 import { formatDuration } from "@/lib/solar";
 import type { Month } from "@/types/content";
 import { modeLabel } from "./modes";
@@ -20,7 +20,7 @@ const known = new Set<string>(places.map((p) => p.id));
 
 function LegLine({ leg, alternative = false }: { leg: PlannedLeg; alternative?: boolean }) {
   return (
-    <div className={alternative ? "opacity-75" : ""}>
+    <div className={alternative ? "border-l border-ink/20 pl-3" : ""}>
       <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
         <span className="meta w-28 shrink-0 text-stone">{modeLabel[leg.mode]}</span>
         <span className="font-sans">
@@ -65,15 +65,15 @@ function PlaceList({ stops, onToggle }: { stops: string[]; onToggle: (id: string
  * State lives in the URL so a route can be shared or sent to the enquiry form.
  */
 export function RouteBuilder() {
-  const params = useSearchParams();
-  // Read the URL once; afterwards local state leads and the URL mirrors it, so a route can be shared.
-  const [state, setState] = useState(() => {
+  const [state, setState] = useState<{ stops: string[]; flightFree: boolean; month?: Month }>({ stops: [], flightFree: true });
+  // A shared link (?stops=…&flights=1&month=7) restores its route; afterwards the URL mirrors local state.
+  useInitialUrlParams((params) => {
     const m = Number(params.get("month"));
-    return {
+    setState({
       stops: (params.get("stops") ?? "").split(",").filter((s) => known.has(s)),
       flightFree: params.get("flights") !== "1",
       month: m >= 1 && m <= 12 ? (m as Month) : undefined,
-    };
+    });
   });
   const { stops, flightFree, month } = state;
 

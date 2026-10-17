@@ -78,8 +78,7 @@ export function ScandinaviaMap({ stops, legs, onToggle }: MapProps) {
             type="button"
             onClick={() => onToggle(p.id)}
             aria-pressed={selected}
-            aria-label={selected ? `${p.name}, stop ${order + 1}. Remove` : `Add ${p.name}`}
-            className="group absolute -translate-x-1/2 -translate-y-1/2 p-1.5"
+            className="group absolute -translate-x-1/2 -translate-y-1/2 p-[7px]"
             style={{ left: pct(point.x, MAP_WIDTH), top: pct(point.y, MAP_HEIGHT) }}
           >
             <span
@@ -87,8 +86,9 @@ export function ScandinaviaMap({ stops, legs, onToggle }: MapProps) {
                 selected ? "size-5 border-lingon bg-lingon font-mono text-[0.625rem] text-birch-50" : "size-2.5 border-ink bg-birch-50 group-hover:size-3.5 group-focus-visible:size-3.5"
               }`}
             >
-              {selected ? order + 1 : null}
+              <span aria-hidden>{selected ? order + 1 : null}</span>
             </span>
+            {!selected && <span className="sr-only">Add </span>}
             <span
               className={`pointer-events-none absolute left-full top-1/2 -translate-y-1/2 whitespace-nowrap pl-0.5 font-sans text-xs ${
                 selected || ALWAYS_LABELLED.has(p.id) ? "opacity-100" : "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100"
@@ -96,6 +96,7 @@ export function ScandinaviaMap({ stops, legs, onToggle }: MapProps) {
             >
               {p.name}
             </span>
+            {selected && <span className="sr-only">, stop {order + 1}. Press to remove</span>}
           </button>
         );
       })}

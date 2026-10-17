@@ -181,11 +181,11 @@ interface JournalMeta { slug: string; title: string; description: string; date: 
 
 ## Build order (each ends with dev-server check + commit + push)
 1. ✅ This plan.
-2. Scaffold, tokens, fonts, Logo, Horizon/SunPath, header/footer/nav, `lib/solar.ts` + tests.
-3. Homepage with live light, hero image sets, featured journeys/destinations, testimonials.
-4. Light Calendar + Slow Route Builder (map script, routing + tests).
-5. Destinations, journeys, experiences, Black Book, Sápmi, Travelling lighter, About, journal, FAQ, Legal, enquiry + API.
-6. Polish: a11y (axe, keyboard pass, screen-reader labels), SEO, Lighthouse (target ≥ 95 across categories), voice lint.
+2. ✅ Scaffold, tokens, fonts, Logo, Horizon/SunPath, header/footer/nav, `lib/solar.ts` + tests.
+3. ✅ Homepage with live light, hero image sets, featured journeys/destinations, testimonials.
+4. ✅ Light Calendar + Slow Route Builder (map script, routing + tests).
+5. ✅ Destinations, journeys, experiences, Black Book, Sápmi, Travelling lighter, About, journal, FAQ, Legal, enquiry + API.
+6. ✅ Polish: a11y (axe, keyboard pass, screen-reader labels), SEO, Lighthouse (target ≥ 95 across categories), voice lint.
 7. Deploy: push branch → Vercel preview from the Git integration; production after you merge to `main` (or via Vercel tooling if available in-session).
 
 ## Verification

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { Logo } from "@/components/brand/Logo";
 import { menuGroups, overlayHeaderRoutes, primaryNav, site } from "@/config/site";
 
@@ -110,7 +110,7 @@ export function Header() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             ref={panel}
             id="site-menu"
             role="dialog"
@@ -134,7 +134,7 @@ export function Header() {
             <nav aria-label="Site" className="gutter grid-12 gap-y-12 py-14 md:py-20">
               {menuGroups.map((group) => (
                 <div key={group.label} className="col-span-12 sm:col-span-6 lg:col-span-3">
-                  <p className="meta mb-5 text-birch-50/60">{group.label}</p>
+                  <p className="meta mb-5 text-birch-50/80">{group.label}</p>
                   <ul className="space-y-3">
                     {group.items.map((item) => (
                       <li key={item.href}>
@@ -150,7 +150,7 @@ export function Header() {
             <div className="gutter pb-12">
               <p className="lede italic text-birch-50/80">{site.promise}</p>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

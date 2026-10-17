@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { EnquiryForm } from "@/components/enquiry/EnquiryForm";
 
 export const metadata: Metadata = {
@@ -19,9 +18,7 @@ export default function EnquirePage() {
         <p className="col-span-12 text-stone md:col-span-4 md:self-end">Everything is optional except how to reach you. A planner reads every enquiry and replies personally.</p>
       </header>
       <div className="gutter relative pb-24">
-        <Suspense fallback={null}>
-          <EnquiryForm />
-        </Suspense>
+                  <EnquiryForm />
       </div>
     </div>
   );

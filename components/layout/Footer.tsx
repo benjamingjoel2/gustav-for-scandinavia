@@ -28,7 +28,7 @@ export function Footer() {
         <nav aria-label="Footer" className="col-span-12 grid grid-cols-2 gap-x-6 gap-y-10 font-sans text-[0.9375rem] sm:grid-cols-4 lg:col-span-7">
           {menuGroups.map((group) => (
             <div key={group.label}>
-              <p className="meta mb-4 text-birch-50/55">{group.label}</p>
+              <p className="meta mb-4 text-birch-50/80">{group.label}</p>
               <ul className="space-y-2">
                 {group.items.map((item) => (
                   <li key={item.href}>
@@ -43,13 +43,13 @@ export function Footer() {
         </nav>
 
         <div className="col-span-12 grid gap-8 border-t border-birch-50/20 pt-8 md:grid-cols-3">
-          <div className="meta space-y-1 text-birch-50/70">
+          <div className="meta space-y-1 text-birch-50/80">
             <p>{site.company.legalName}</p>
             <p>{site.company.registration}</p>
             <p>{site.company.address}</p>
           </div>
-          <p className="meta normal-case leading-relaxed tracking-normal text-birch-50/70">{site.company.packageProtection}</p>
-          <div className="meta space-y-1 text-birch-50/70 md:text-right">
+          <p className="meta normal-case leading-relaxed tracking-normal text-birch-50/80">{site.company.packageProtection}</p>
+          <div className="meta space-y-1 text-birch-50/80 md:text-right">
             <p>
               <a href={`mailto:${site.contact.email}`} className="hover:underline">
                 {site.contact.email}
@@ -60,7 +60,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="col-span-12 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-xs text-birch-50/60">
+        <div className="col-span-12 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-xs text-birch-50/80">
           <p>© {new Date().getFullYear()} {site.name}</p>
           <CurrencySwitcher className="order-last ml-auto text-birch-50/80" />
           {legalNav.map((item) => (

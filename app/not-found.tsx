@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <div className="flex min-h-svh flex-col justify-center bg-polar pt-16 text-birch-50">
       <div className="gutter">
-        <p className="eyebrow text-birch-50/60">404</p>
+        <p className="eyebrow text-birch-50/80">404</p>
         <h1 className="headline mt-4 max-w-2xl">
           This page is in <em>polar night.</em>
         </h1>

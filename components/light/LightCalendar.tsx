@@ -111,7 +111,7 @@ export function LightCalendar({ year, initialDay }: { year: number; initialDay: 
                 setDayOfYear(start + 14);
               }}
               aria-pressed={day.month === i + 1}
-              className="meta py-1 text-left text-birch-50/55 hover:text-birch-50 aria-pressed:text-birch-50"
+              className="meta py-1 text-left text-birch-50/80 hover:text-birch-50 aria-pressed:text-birch-50"
             >
               <span aria-hidden>{monthName(i + 1).slice(0, 1)}</span>
               <span className="hidden sm:inline" aria-hidden>
@@ -130,7 +130,7 @@ export function LightCalendar({ year, initialDay }: { year: number; initialDay: 
             <li key={id} className="grid border-t border-birch-50/15 first:border-t-0 md:grid-cols-12 md:items-center">
               <div className="gutter flex items-baseline justify-between gap-4 pt-4 md:col-span-3 md:block md:py-4 md:pr-0">
                 <p className="font-sans text-lg">{place.name}</p>
-                <p className="meta text-birch-50/70 md:mt-1">
+                <p className="meta text-birch-50/80 md:mt-1">
                   {place.lat.toFixed(1)}°N · {daylightText(id, day)}
                 </p>
               </div>
@@ -141,7 +141,7 @@ export function LightCalendar({ year, initialDay }: { year: number; initialDay: 
       </ul>
 
       <section aria-labelledby="moments-title" className="gutter py-16" aria-live="polite">
-        <h2 id="moments-title" className="eyebrow text-birch-50/60">
+        <h2 id="moments-title" className="eyebrow text-birch-50/80">
           What {monthName(day.month, "long")}&rsquo;s light makes possible
         </h2>
         <ul className="mt-8 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">

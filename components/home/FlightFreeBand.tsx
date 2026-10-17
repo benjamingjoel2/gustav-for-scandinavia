@@ -6,7 +6,7 @@ export function FlightFreeBand() {
   return (
     <section aria-labelledby="flight-free-title" className="bg-fjord py-24 text-birch-50 md:py-32">
       <div className="gutter grid-12 gap-y-8">
-        <p className="eyebrow col-span-12 text-birch-50/70">Travelling lighter</p>
+        <p className="eyebrow col-span-12 text-birch-50/80">Travelling lighter</p>
         <h2 id="flight-free-title" className="headline col-span-12 md:col-span-8">
           From Copenhagen to the Arctic <em>without leaving the ground.</em>
         </h2>

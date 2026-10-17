@@ -13,6 +13,7 @@ export function JourneyCard({ journey, className = "" }: { journey: JourneySumma
         <div className="relative aspect-[4/5] overflow-hidden bg-birch-200">
           <Photo
             image={journeyImage(journey.slug)}
+            ratio="4:5"
             sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 80vw"
             className="transition-transform duration-[1.6s] ease-light group-hover:scale-[1.03]"
           />

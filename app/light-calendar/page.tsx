@@ -28,7 +28,7 @@ export default function LightCalendarPage() {
   return (
     <div className="bg-polar pt-16 text-birch-50 md:pt-[4.5rem]">
       <header className="gutter grid-12 gap-y-6 pb-12 pt-16 md:pt-24">
-        <p className="eyebrow col-span-12 text-birch-50/60">The Light Calendar</p>
+        <p className="eyebrow col-span-12 text-birch-50/80">The Light Calendar</p>
         <h1 className="headline col-span-12 md:col-span-8">
           Plan by the light, <em>not the calendar.</em>
         </h1>
@@ -45,11 +45,11 @@ export default function LightCalendarPage() {
           The same, <em>as a table.</em>
         </h2>
         <p className="mt-4 max-w-xl text-birch-50/75">Daylight on the 15th of each month, and this year&rsquo;s midnight sun and polar night, calculated for each place.</p>
-        <div className="mt-8 overflow-x-auto">
+        <div className="mt-8 overflow-x-auto" tabIndex={0} role="region" aria-labelledby="table-title">
           <table className="w-full min-w-[56rem] border-collapse text-left">
             <caption className="sr-only">Daylight on the 15th of each month, {year}</caption>
             <thead>
-              <tr className="meta text-birch-50/60">
+              <tr className="meta text-birch-50/80">
                 <th scope="col" className="py-2 pr-4 font-normal">
                   Place
                 </th>
@@ -93,7 +93,7 @@ export default function LightCalendarPage() {
             </tbody>
           </table>
         </div>
-        <p className="meta mt-6 text-birch-50/55">
+        <p className="meta mt-6 text-birch-50/80">
           Sunrise and sunset use the standard NOAA solar calculation, with the sun counted as up while any of it is above the horizon. Mountains
           and weather have their own opinions.
         </p>

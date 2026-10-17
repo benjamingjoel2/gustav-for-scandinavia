@@ -1,6 +1,5 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { MiniLightCalendar } from "@/components/light/MiniLightCalendar";
 import { site } from "@/config/site";
@@ -10,6 +9,7 @@ import { journeys } from "@/data/journeys";
 import { getPlace, places, type PlaceId } from "@/data/places";
 import { comfortLevels, contactMethods, emptyEnquiry, interests, travelStyles, validateEnquiry, type Enquiry, type EnquiryErrors } from "@/lib/enquiry";
 import { monthName } from "@/lib/format";
+import { useInitialUrlParams } from "@/lib/use-url-params";
 
 /** Turn ?journey=… or ?route=… into a starting point for the form. */
 function prefill(params: URLSearchParams): Enquiry {
@@ -68,8 +68,8 @@ function Group({ legend, children, className = "" }: { legend: string; children:
 }
 
 export function EnquiryForm() {
-  const params = useSearchParams();
-  const [values, setValues] = useState<Enquiry>(() => prefill(new URLSearchParams(params.toString())));
+  const [values, setValues] = useState<Enquiry>(emptyEnquiry);
+  useInitialUrlParams((params) => setValues(prefill(params)));
   const [errors, setErrors] = useState<EnquiryErrors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
   const done = useRef<HTMLDivElement>(null);

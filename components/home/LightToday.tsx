@@ -12,7 +12,7 @@ export function LightToday({ now }: { now: number }) {
   return (
     <section aria-labelledby="light-today-title" className="bg-polar py-24 text-birch-50 md:py-32">
       <div className="gutter grid-12 gap-y-6">
-        <p className="eyebrow col-span-12 text-birch-50/60">Today, south to north</p>
+        <p className="eyebrow col-span-12 text-birch-50/80">Today, south to north</p>
         <h2 id="light-today-title" className="headline col-span-12 md:col-span-8">
           The same day, <em>five different lights.</em>
         </h2>
@@ -30,7 +30,7 @@ export function LightToday({ now }: { now: number }) {
             <li key={id} className="grid border-b border-birch-50/20 md:grid-cols-12 md:items-center">
               <div className="gutter pt-5 md:col-span-3 md:py-6 md:pr-0">
                 <p className="font-sans text-xl">{place.name}</p>
-                <p className="meta mt-1 text-birch-50/70">
+                <p className="meta mt-1 text-birch-50/80">
                   {t.state === "midnight-sun"
                     ? "Midnight sun"
                     : t.state === "polar-night"
@@ -46,7 +46,7 @@ export function LightToday({ now }: { now: number }) {
 
       <div className="gutter mt-12 flex flex-wrap items-center gap-6">
         <ArrowLink href="/light-calendar">Open the Light Calendar</ArrowLink>
-        <p className="meta text-birch-50/60">Calculated from latitude and longitude. No forecasts, just geometry.</p>
+        <p className="meta text-birch-50/80">Calculated from latitude and longitude. No forecasts, just geometry.</p>
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { RouteBuilder } from "@/components/route/RouteBuilder";
 
 export const metadata: Metadata = {
@@ -22,9 +21,7 @@ export default function RouteBuilderPage() {
         </p>
       </header>
       <div className="gutter pb-24">
-        <Suspense fallback={<p className="text-stone">Loading the map…</p>}>
-          <RouteBuilder />
-        </Suspense>
+                  <RouteBuilder />
       </div>
     </div>
   );

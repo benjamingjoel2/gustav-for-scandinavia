@@ -105,7 +105,7 @@ export default async function DestinationPage({ params }: Props) {
           <p className="meta mt-6">
             {formatCoords(place.lat, place.lng)} · Best {formatMonths(destination.bestMonths)}
           </p>
-          {image && <p className="meta mt-2 text-[0.625rem] text-birch-50/50">Photo: {image.credit}</p>}
+          {image && <p className="meta mt-2 text-[0.625rem] text-birch-50/80">Photo: {image.credit}</p>}
         </div>
       </header>
 
@@ -121,7 +121,7 @@ export default async function DestinationPage({ params }: Props) {
       <section aria-labelledby="light-title" className="bg-polar py-20 text-birch-50 md:py-28">
         <div className="gutter grid-12 gap-y-10">
           <div className="col-span-12 md:col-span-5">
-            <p className="eyebrow text-birch-50/60">The light</p>
+            <p className="eyebrow text-birch-50/80">The light</p>
             <h2 id="light-title" className="headline mt-4">
               {destination.name}, <em>through the year.</em>
             </h2>
@@ -136,13 +136,13 @@ export default async function DestinationPage({ params }: Props) {
               </div>
               {polar["midnight-sun"].length > 0 && (
                 <div>
-                  <dt className="meta text-birch-50/60">Midnight sun {year}</dt>
+                  <dt className="meta text-birch-50/80">Midnight sun {year}</dt>
                   <dd className="meta mt-1">{polar["midnight-sun"].map(range).join(", ")}</dd>
                 </div>
               )}
               {polarNight.length > 0 && (
                 <div>
-                  <dt className="meta text-birch-50/60">Polar night</dt>
+                  <dt className="meta text-birch-50/80">Polar night</dt>
                   <dd className="meta mt-1">{range({ start: polarNight.at(-1)!.start, end: polarNight[0].end })}</dd>
                 </div>
               )}
@@ -156,7 +156,7 @@ export default async function DestinationPage({ params }: Props) {
           </div>
         </div>
         <div className="mt-14">
-          <p className="gutter meta text-birch-50/60">Today in {place.name}</p>
+          <p className="gutter meta text-birch-50/80">Today in {place.name}</p>
           <SunPath place={place} day={day} height={110} />
         </div>
       </section>
@@ -164,7 +164,7 @@ export default async function DestinationPage({ params }: Props) {
       <section aria-labelledby="slow-title" className={`py-20 md:py-28 ${tone}`}>
         <div className="gutter grid-12 gap-y-10">
           <div className="col-span-12 md:col-span-5">
-            <p className="eyebrow opacity-75">Getting there slowly</p>
+            <p className="eyebrow opacity-90">Getting there slowly</p>
             <h2 id="slow-title" className="headline mt-4">
               From {nameOf(detail.slowWay.stops[0])}, <em>the slow way.</em>
             </h2>
@@ -177,7 +177,7 @@ export default async function DestinationPage({ params }: Props) {
             {route.segments.flatMap((s) => s.legs).map((leg, i) => (
               <li key={`${leg.id}-${i}`} className="border-b border-current/30 py-4">
                 <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <span className="meta w-24 opacity-75">{modeLabel[leg.mode]}</span>
+                  <span className="meta w-24 opacity-90">{modeLabel[leg.mode]}</span>
                   <span className="font-sans">
                     {nameOf(leg.start)} → {nameOf(leg.end)}
                   </span>
