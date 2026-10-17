@@ -59,7 +59,7 @@ export function SunPath({ place, day, markerMinute, labels = true, className = "
   const set = crossing(times.sunset);
 
   return (
-    <figure className={`relative ${className}`}>
+    <figure className={`relative overflow-x-clip ${className}`}>
       <div className="relative" style={{ height }}>
         <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="absolute inset-0 h-full w-full overflow-visible" aria-hidden>
           <defs>

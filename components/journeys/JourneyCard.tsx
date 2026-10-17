@@ -9,7 +9,7 @@ import type { JourneySummary } from "@/types/content";
 export function JourneyCard({ journey, className = "" }: { journey: JourneySummary; className?: string }) {
   return (
     <article className={className}>
-      <Link href={`/journeys/${journey.slug}`} className="group block">
+      <Link href={`/journeys/${journey.slug}`} className="group relative block">
         <div className="relative aspect-[4/5] overflow-hidden bg-birch-200">
           <Photo
             image={journeyImage(journey.slug)}
