@@ -103,11 +103,11 @@ export default function DesignSystem() {
 
       <Section tone="polar" className="py-16">
         <div className="gutter">
-          <h2 className="eyebrow text-birch-50/60">The horizon line · sun path on the 21st</h2>
+          <h2 className="eyebrow text-birch-50/80">The horizon line · sun path on the 21st</h2>
         </div>
         {(["June", "December"] as const).map((label) => (
           <div key={label} className="mt-10">
-            <p className="gutter meta text-birch-50/60">{label}</p>
+            <p className="gutter meta text-birch-50/80">{label}</p>
             {arcs.map((id) => {
               const place = getPlace(id);
               return (

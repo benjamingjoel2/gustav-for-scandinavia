@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SunPath } from "@/components/horizon/SunPath";
 import { DottedLink } from "@/components/ui/Links";
@@ -101,7 +101,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
     >
       <AnimatePresence initial={false}>
         {image && (
-          <motion.div key={image.src} className="absolute inset-0 -z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={fade}>
+          <m.div key={image.src} className="absolute inset-0 -z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={fade}>
             <Image
               src={image.src}
               alt={image.alt}
@@ -112,7 +112,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
               className="object-cover"
               style={{ objectPosition: image.focus ?? "50% 50%" }}
             />
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
       <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(16_27_33/0.45)_0%,rgb(16_27_33/0.05)_35%,rgb(16_27_33/0.25)_55%,rgb(16_27_33/0.8)_100%)]" />
@@ -126,9 +126,9 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
       <div className="flex-1" />
 
       <AnimatePresence mode="wait" initial={false}>
-        <motion.div key={place.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.6, ease: EASE }}>
+        <m.div key={place.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.6, ease: EASE }}>
           <SunPath place={place} day={day} markerMinute={minute} height={110} labels={false} />
-        </motion.div>
+        </m.div>
       </AnimatePresence>
 
       <div className="gutter grid-12 gap-y-6 pb-8 pt-6 md:pb-10">
@@ -160,7 +160,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
                   type="button"
                   onClick={() => choose(i)}
                   aria-pressed={i === index}
-                  className="meta border border-transparent px-2.5 py-1.5 text-birch-50/70 transition-colors duration-500 hover:text-birch-50 aria-pressed:border-birch-50/60 aria-pressed:text-birch-50"
+                  className="meta border border-transparent px-2.5 py-1.5 text-birch-50/80 transition-colors duration-500 hover:text-birch-50 aria-pressed:border-birch-50/60 aria-pressed:text-birch-50"
                 >
                   {getPlace(id).name}
                 </button>
@@ -168,13 +168,13 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
             ))}
           </ul>
           {!reduceMotion && (
-            <button type="button" onClick={() => setPaused((p) => !p)} className="meta ml-auto px-2.5 py-1.5 text-birch-50/70 hover:text-birch-50">
+            <button type="button" onClick={() => setPaused((p) => !p)} className="meta ml-auto px-2.5 py-1.5 text-birch-50/80 hover:text-birch-50">
               {paused ? "▶ Play" : "❚❚ Pause"}
               <span className="sr-only"> rotating places</span>
             </button>
           )}
           {image && (
-            <a href={image.creditUrl} className="meta w-full text-[0.625rem] text-birch-50/50 hover:text-birch-50 sm:ml-4 sm:w-auto" rel="noopener">
+            <a href={image.creditUrl} className="meta w-full text-[0.625rem] text-birch-50/80 hover:text-birch-50 sm:ml-4 sm:w-auto" rel="noopener">
               Photo: {image.credit}
             </a>
           )}

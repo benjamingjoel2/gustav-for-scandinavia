@@ -101,7 +101,7 @@ export default async function JourneyPage({ params }: Props) {
               <Price eur={journey.priceFromEUR} /> per person · Best {formatMonths(journey.bestMonths)}
             </p>
           </div>
-          {image && <p className="meta col-span-12 text-[0.625rem] text-birch-50/50">Photo: {image.credit}</p>}
+          {image && <p className="meta col-span-12 text-[0.625rem] text-birch-50/80">Photo: {image.credit}</p>}
         </div>
       </header>
 

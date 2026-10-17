@@ -39,11 +39,11 @@ export default function DestinationsPage() {
               <li key={d.slug}>
                 <Link href={`/destinations/${d.slug}`} className="group block">
                   <div className="relative aspect-[4/3] overflow-hidden bg-black/10">
-                    <Photo image={destinationImage(d.slug)} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw" className="transition-transform duration-[1.6s] ease-light group-hover:scale-[1.03]" />
+                    <Photo image={destinationImage(d.slug)} ratio="4:3" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw" className="transition-transform duration-[1.6s] ease-light group-hover:scale-[1.03]" />
                   </div>
                   <div className="mt-4 flex items-baseline justify-between gap-4 border-b border-current/30 pb-3">
                     <h3 className="font-sans text-xl">{d.name}</h3>
-                    <span className="meta opacity-75">Best {formatMonths(d.bestMonths)}</span>
+                    <span className="meta opacity-90">Best {formatMonths(d.bestMonths)}</span>
                   </div>
                   <p className="mt-3 opacity-90">{d.pitch}</p>
                 </Link>

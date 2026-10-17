@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useRef, useState, type KeyboardEvent } from "react";
 import { Photo } from "@/components/ui/Photo";
 import { ArrowLink } from "@/components/ui/Links";
@@ -47,7 +47,7 @@ export function CountryExplorer() {
     <section aria-labelledby="where-title" className={`transition-colors duration-700 ease-light ${toneClasses[countryTone[country]]}`}>
       <div className="gutter grid-12 gap-y-10 py-20 md:py-28">
         <div className="col-span-12 lg:col-span-5">
-          <p className="eyebrow opacity-75">Where Gustav goes</p>
+          <p className="eyebrow opacity-90">Where Gustav goes</p>
           <h2 id="where-title" className="headline mt-4">
             Four countries, <em>one north.</em>
           </h2>
@@ -83,7 +83,7 @@ export function CountryExplorer() {
                     onMouseEnter={() => setActiveSlug(d.slug)}
                     onFocus={() => setActiveSlug(d.slug)}
                     aria-current={d.slug === active.slug ? "true" : undefined}
-                    className="group flex items-baseline gap-4 py-3 opacity-70 transition-opacity duration-500 hover:opacity-100 focus-visible:opacity-100 aria-[current=true]:opacity-100"
+                    className="group flex items-baseline gap-4 py-3 opacity-90 transition-opacity duration-500 hover:opacity-100 focus-visible:opacity-100 aria-[current=true]:opacity-100 aria-[current=true]:[&_.font-sans]:italic"
                   >
                     <span className="meta w-6 shrink-0">{String(i + 1).padStart(2, "0")}</span>
                     <span className="font-sans text-lg">{d.name}</span>
@@ -101,7 +101,7 @@ export function CountryExplorer() {
         <div className="col-span-12 lg:col-span-6 lg:col-start-7">
           <div className="relative aspect-[4/3] overflow-hidden bg-black/10 lg:sticky lg:top-24 lg:aspect-[4/5]">
             <AnimatePresence initial={false}>
-              <motion.div
+              <m.div
                 key={active.slug}
                 className="absolute inset-0"
                 initial={{ opacity: 0 }}
@@ -110,14 +110,14 @@ export function CountryExplorer() {
                 transition={{ duration: reduceMotion ? 0 : 0.9, ease: [0.22, 0.61, 0.36, 1] }}
               >
                 <Photo image={image} sizes="(min-width: 1024px) 45vw, 100vw" />
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
           <div className="mt-4 flex flex-wrap justify-between gap-2">
             <p className="meta">
               {active.name} · {formatCoords(place.lat, place.lng)}
             </p>
-            <p className="meta opacity-75">Best {formatMonths(active.bestMonths)}</p>
+            <p className="meta opacity-90">Best {formatMonths(active.bestMonths)}</p>
           </div>
           <p className="mt-3 max-w-lg opacity-90">{active.pitch}</p>
         </div>

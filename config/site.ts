@@ -4,7 +4,10 @@ export const site = {
   promise: "Follow the light.",
   description:
     "Private journeys through Norway, Sweden, Denmark and Finland. Slowly, by train, boat and on foot, following the light.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://gustav.travel",
+  // Set NEXT_PUBLIC_SITE_URL once the domain is chosen; Vercel's production URL is used until then.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
   locale: "en_GB",
   contact: {
     email: "hello@example.com", // TODO: real address
