@@ -1,0 +1,101 @@
+import type { LightMoment } from "@/types/content";
+
+// Seasons checked October 2026 against the sources noted. Midnight sun and polar night dates are calculated, not typed.
+export const lightMoments: LightMoment[] = [
+  {
+    id: "aurora",
+    label: "Aurora season",
+    months: [9, 10, 11, 12, 1, 2, 3],
+    where: "Northern Norway, Swedish and Finnish Lapland",
+    text: "From late September to late March the nights are dark enough. Clear skies matter more than the month; we plan inland escapes for when the coast clouds over.",
+    journeySlugs: ["arctic-winter-light", "lapland-three-borders"],
+    experienceIds: ["northern-lights", "husky-sledding"],
+    source: "Visit Norway / Norwegian Travel; Swedish Lapland tourism",
+  },
+  {
+    id: "midnight-sun",
+    label: "Midnight sun",
+    months: [5, 6, 7],
+    where: "Above the Arctic Circle",
+    text: "From mid-May in the far north to late July, the sun circles without setting. Hike at midnight, eat dinner at eleven, sleep with the curtains drawn.",
+    journeySlugs: ["midnight-sun-lofoten", "flight-free-scandinavia"],
+    experienceIds: ["midnight-sun", "hiking-kayaking"],
+  },
+  {
+    id: "polar-night",
+    label: "Polar night and blue light",
+    months: [11, 12, 1],
+    where: "Tromsø, the North Cape, Svalbard",
+    text: "The sun stays below the horizon, but noon brings hours of blue and pink twilight. Quiet, cold, and unlike anywhere else.",
+    journeySlugs: ["arctic-winter-light"],
+    experienceIds: ["northern-lights", "cabin"],
+  },
+  {
+    id: "whales",
+    label: "Winter whales",
+    months: [11, 12, 1],
+    where: "Fjords north of Tromsø",
+    text: "Orcas and humpbacks follow the herring into the fjords from about November to January. No one can guarantee them; the season is the best chance.",
+    journeySlugs: ["arctic-winter-light"],
+    experienceIds: ["whale-watching"],
+    source: "Visit Tromsø",
+  },
+  {
+    id: "golden-evenings",
+    label: "Long golden evenings",
+    months: [5, 6, 7, 8],
+    where: "Copenhagen, Stockholm, Oslo, Helsinki",
+    text: "In the south the sun sets late and slowly. Swim in the harbour after work, then sit outside until the light finally gives up.",
+    journeySlugs: ["three-capitals-by-train", "archipelago-summer"],
+    experienceIds: ["archipelago-sailing", "new-nordic-dining"],
+  },
+  {
+    id: "midsummer",
+    label: "Midsummer",
+    months: [6],
+    where: "Everywhere",
+    text: "The longest days, celebrated with bonfires, flower crowns and herring, depending on which side of the border you're on.",
+    journeySlugs: ["archipelago-summer", "fjords-slowly"],
+    experienceIds: ["archipelago-sailing", "cabin"],
+  },
+  {
+    id: "autumn-colours",
+    label: "Autumn colours",
+    months: [9, 10],
+    where: "Lapland first, then south",
+    text: "Ruska, the Finnish word for it: birch and blueberry turning gold and red on the fells in September, and the forests further south in October.",
+    journeySlugs: ["fjords-slowly", "lapland-three-borders"],
+    experienceIds: ["hiking-kayaking", "cabin"],
+  },
+  {
+    id: "spring-winter",
+    label: "Spring winter",
+    months: [3, 4],
+    where: "The far north",
+    text: "Deep snow, long bright days and sun on your face. The best time for skiing, sledding and lakes you can walk across.",
+    journeySlugs: ["lapland-three-borders"],
+    experienceIds: ["husky-sledding", "reindeer"],
+  },
+  {
+    id: "christmas",
+    label: "Christmas markets",
+    months: [11, 12],
+    where: "Copenhagen, Stockholm, Helsinki",
+    text: "Candles in every window, mulled wine, and markets that open in late November. Short days, made up for with light of another kind.",
+    journeySlugs: ["a-nordic-christmas"],
+    experienceIds: ["christmas-market", "sauna"],
+  },
+  {
+    id: "fjord-season",
+    label: "Fjord season",
+    months: [5, 6, 7, 8, 9],
+    where: "Western Norway",
+    text: "Waterfalls at full strength in May and June, quiet water in September. The fjord boats and mountain roads run in this window.",
+    journeySlugs: ["fjords-slowly"],
+    experienceIds: ["fjord-cruising", "hiking-kayaking"],
+  },
+];
+
+export function momentsIn(month: number) {
+  return lightMoments.filter((m) => m.months.includes(month as LightMoment["months"][number]));
+}

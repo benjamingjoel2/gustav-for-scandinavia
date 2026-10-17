@@ -44,3 +44,6 @@ export function getPlace(id: PlaceId): Place {
 
 /** Rotating order for the homepage live light. */
 export const liveLightPlaceIds: PlaceId[] = ["tromso", "stockholm", "copenhagen", "rovaniemi", "svalbard"];
+
+/** Light Calendar rows, south to north. */
+export const calendarPlaceIds: PlaceId[] = ["copenhagen", "stockholm", "helsinki", "bergen", "trondheim", "rovaniemi", "tromso", "north-cape", "svalbard"];
