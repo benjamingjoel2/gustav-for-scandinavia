@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SunMark } from "@/components/brand/SunMark";
+import { CurrencySwitcher } from "@/components/ui/Currency";
 import { PillLink } from "@/components/ui/Links";
 import { legalNav, menuGroups, site } from "@/config/site";
 
@@ -61,6 +62,7 @@ export function Footer() {
 
         <div className="col-span-12 flex flex-wrap items-center gap-x-6 gap-y-2 font-sans text-xs text-birch-50/60">
           <p>© {new Date().getFullYear()} {site.name}</p>
+          <CurrencySwitcher className="order-last ml-auto text-birch-50/80" />
           {legalNav.map((item) => (
             <Link key={item.href} href={item.href} className="hover:text-birch-50 hover:underline">
               {item.label}
