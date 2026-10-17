@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/*
+ * Gustav design tokens.
+ * Base: birch. Blocks: pine, fjord, lichen, heather (one per country). Accent: lingonberry, used sparingly.
+ * Type: sans (Albert Sans) for display and UI, serif (Newsreader) for headlines and reading,
+ * mono (DM Mono) for data: daylight, coordinates, times, durations, prices.
+ */
+@theme {
+  --color-birch: #f3efe6;
+  --color-birch-50: #fbf9f4;
+  --color-birch-200: #e8e2d5;
+  --color-birch-300: #d9d1c0;
+  --color-ink: #1b2420;
+  --color-stone: #6b6a63;
+  --color-pine: #2e4639;
+  --color-fjord: #4a6072;
+  --color-lichen: #5f6b53;
+  --color-heather: #8a5666;
+  --color-oak: #a57d4e;
+  --color-oak-deep: #7e5f38;
+  --color-lingon: #a3263a;
+  --color-lingon-deep: #861d2f;
+  --color-polar: #101b21;
+  --color-mist: #c8d2d6;
+
+  --font-sans: var(--font-albert), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), ui-serif, Georgia, serif;
+  --font-mono: var(--font-dm-mono), ui-monospace, monospace;
+
+  --text-display: clamp(5.5rem, 0.5rem + 25vw, 24rem);
+  --text-display--line-height: 0.82;
+  --text-display--letter-spacing: -0.055em;
+  --text-title: clamp(2.75rem, 1.6rem + 4.6vw, 6rem);
+  --text-title--line-height: 0.95;
+  --text-title--letter-spacing: -0.035em;
+  --text-headline: clamp(2rem, 1.4rem + 2.4vw, 3.5rem);
+  --text-headline--line-height: 1.05;
+  --text-headline--letter-spacing: -0.015em;
+  --text-lede: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  --text-lede--line-height: 1.35;
+  --text-reading: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-reading--line-height: 1.6;
+  --text-meta: 0.75rem;
+  --text-meta--line-height: 1.45;
+  --text-meta--letter-spacing: 0.04em;
+
+  --ease-light: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@layer base {
+  html {
+    background: var(--color-birch);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-family: var(--font-serif);
+    font-size: var(--text-reading);
+    line-height: 1.6;
+  }
+  ::selection {
+    background: var(--color-oak);
+    color: var(--color-birch-50);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-lingon);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Outer margins shared by every section, so the horizon line and grids align. */
+  .gutter {
+    padding-inline: clamp(1.25rem, 5vw, 5.5rem);
+  }
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(1rem, 2vw, 2rem);
+  }
+  /* Small letter-spaced label above headings. */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  /* Data voice: daylight, coordinates, durations. */
+  .meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  /* Serif headline with one italic accent word: <h2 class="headline">Fjords, <em>slowly</em></h2> */
+  .headline {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: var(--text-headline);
+    line-height: var(--text-headline--line-height);
+    letter-spacing: var(--text-headline--letter-spacing);
+  }
+  .headline em,
+  .lede em {
+    font-style: italic;
+  }
+  .lede {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: var(--text-lede);
+    line-height: var(--text-lede--line-height);
+  }
+  .prose-gustav {
+    max-width: 66ch;
+  }
+  .prose-gustav p + p {
+    margin-top: 1.1em;
+  }
+  /* Dotted underline link, used for quiet inline calls to action. */
+  .link-dotted {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    text-decoration: underline dotted;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.35em;
+    transition: text-decoration-color 0.4s var(--ease-light);
+  }
+  .link-dotted:hover {
+    text-decoration-style: solid;
+  }
+}
