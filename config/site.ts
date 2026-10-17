@@ -19,7 +19,7 @@ export const site = {
     packageProtection:
       "Package travel protected under the EU Package Travel Directive (2015/2302). Guarantee provider: [placeholder]. Certificate no. [placeholder].",
   },
-  /** Below this many minutes of daylight today, the homepage hero uses the dark-season photographs. */
+  /** Below this many minutes of daylight today (or while the sun is down), the homepage hero uses the dark-season photographs. */
   darkSeasonThresholdMinutes: 8 * 60,
 } as const;
 
