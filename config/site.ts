@@ -74,10 +74,10 @@ export const menuGroups: { label: string; items: NavItem[] }[] = [
 ];
 
 export const legalNav: NavItem[] = [
-  { label: "Terms & conditions", href: "/legal#terms" },
+  { label: "Terms & conditions", href: "/legal#terms-and-conditions" },
   { label: "Privacy", href: "/legal#privacy" },
   { label: "Cookies", href: "/legal#cookies" },
-  { label: "Package travel", href: "/legal#package-travel" },
+  { label: "Package travel", href: "/legal#package-travel-protection" },
 ];
 
 /** Routes whose first section is a full-bleed photograph; the header sits on top of it. */

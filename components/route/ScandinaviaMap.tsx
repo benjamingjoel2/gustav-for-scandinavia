@@ -12,7 +12,8 @@ const ALWAYS_LABELLED = new Set(["oslo", "bergen", "stockholm", "copenhagen", "h
 interface MapProps {
   stops: string[];
   legs: PlannedLeg[];
-  onToggle: (id: string) => void;
+  /** Without it the map is a picture: only the stops are shown, nothing is clickable. */
+  onToggle?: (id: string) => void;
 }
 
 const pct = (v: number, of: number) => `${(v / of) * 100}%`;
@@ -55,7 +56,19 @@ export function ScandinaviaMap({ stops, legs, onToggle }: MapProps) {
         ))}
       </svg>
 
-      {places.map((p) => {
+      {!onToggle &&
+        stops.map((id, i) => {
+          const point = mapPoints[id];
+          const name = places.find((p) => p.id === id)?.name;
+          return (
+            <span key={id} aria-hidden className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: pct(point.x, MAP_WIDTH), top: pct(point.y, MAP_HEIGHT) }}>
+              <span className="flex size-5 items-center justify-center rounded-full bg-lingon font-mono text-[0.625rem] text-birch-50">{i + 1}</span>
+              <span className="absolute left-full top-1/2 -translate-y-1/2 whitespace-nowrap pl-1 font-sans text-xs font-medium">{name}</span>
+            </span>
+          );
+        })}
+
+      {onToggle && places.map((p) => {
         const point = mapPoints[p.id];
         const order = stops.indexOf(p.id);
         const selected = order >= 0;

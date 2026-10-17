@@ -105,3 +105,96 @@ export interface LightMoment {
   /** Where the season was checked. */
   source?: string;
 }
+
+export type Theme = "restaurant" | "bakery" | "sauna" | "design" | "architecture" | "cabin" | "island" | "gallery";
+
+export interface Experience {
+  /** Also the anchor on /experiences. */
+  id: string;
+  name: string;
+  /** One honest line. */
+  summary: string;
+  /** Two or three short paragraphs. */
+  body: string[];
+  months: Month[];
+  /** e.g. "Late September to late March" */
+  seasonNote: string;
+  destinationSlugs: string[];
+  journeySlugs: string[];
+  source?: string;
+}
+
+/** PLACEHOLDER venue until verified. */
+export interface BlackBookEntry {
+  id: string;
+  name: string;
+  placeholder: true;
+  /** Display location, e.g. "Copenhagen, Nørrebro" */
+  city: string;
+  destinationSlug: string;
+  country: CountryId;
+  theme: Theme;
+  /** One or two sentences in Gustav's voice. */
+  note: string;
+}
+
+/** PLACEHOLDER stay until verified. */
+export interface Stay {
+  id: string;
+  name: string;
+  placeholder: true;
+  destinationSlug: string;
+  /** e.g. "Fjord-side hotel", "Wilderness cabin" */
+  kind: string;
+  note: string;
+}
+
+export interface DestinationDetail {
+  /** Three or four short paragraphs. */
+  body: string[];
+  /** How to get there slowly: from a hub, as stops for the route builder (place ids) and a sentence. */
+  slowWay: { stops: string[]; text: string };
+  /** Seasonal notes for the light section: one short line each for "summer" and "winter". */
+  light: { summer: string; winter: string };
+}
+
+export interface JourneyDay {
+  /** e.g. "1" or "2–3" */
+  day: string;
+  title: string;
+  /** Where you sleep; sunrise and sunset are calculated for this place. */
+  placeId: string;
+  text: string;
+  /** How you travel to this day's place, if you move. */
+  travel?: { mode: Mode; duration: string; note?: string; scenic?: boolean };
+  stayId?: string;
+  experienceIds?: string[];
+}
+
+export interface Itinerary {
+  intro: string[];
+  /** The month used to calculate the light on each day. */
+  defaultMonth: Month;
+  destinationSlugs: string[];
+  experienceIds: string[];
+  included: string[];
+  days: JourneyDay[];
+}
+
+export interface FaqItem {
+  id: string;
+  group: "Planning" | "Light and weather" | "Getting around" | "Money" | "Entry and documents" | "Families" | "Booking";
+  q: string;
+  /** Plain text; paragraphs separated by blank lines. */
+  a: string;
+}
+
+export interface JournalMeta {
+  title: string;
+  description: string;
+  /** ISO date */
+  date: string;
+  /** Key in data/media-sourced experienceImages or destinationImages, e.g. "experience:sauna" */
+  image: string;
+  readingMinutes: number;
+}
