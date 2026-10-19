@@ -6,45 +6,56 @@ Empty repo (`benjamingjoel2/gustav-for-scandinavia`, no commits). We're building
 ## Stack
 - Next.js (current stable, App Router), TypeScript strict, Tailwind CSS v4 (tokens via `@theme` in `globals.css`), Framer Motion.
 - MDX for the journal via `@next/mdx`; each post exports a typed `meta` object (no runtime frontmatter parsing).
-- `next/font/google` (self-hosted at build, no layout shift).
+- `next/font/google` (self-hosted at build, no layout shift): Albert Sans, Newsreader, DM Mono.
 - Vitest for `lib/` (solar, routing, currency); Playwright + axe-core for a11y smoke tests; Lighthouse CLI against Chromium in step 6.
 - No runtime APIs, no database. Everything static/SSG except the enquiry API route; homepage uses ISR (`revalidate = 600`).
 
 ## Design system
 
-**Palette** (Tailwind tokens; contrast checked to WCAG AA in step 2, adjusted if needed)
-| Token | Hex | Use |
+### References and what we take from each
+Three references, one job each, so the result reads as one brand rather than a collage.
+
+| Reference | What we take | What we leave |
 |---|---|---|
-| `birch` | `#F3EFE6` | page background (warm white, not pure white) |
-| `birch-200` | `#E6E0D2` | panels, cards, rules |
-| `ink` | `#17221E` | body text (pine-black) |
-| `pine` | `#1F3D32` | deep green: headings, footer, dark sections |
-| `fjord` | `#5B6F7C` | blue-grey: secondary text, horizon line, map water |
-| `fjord-100` | `#DCE3E6` | soft fills, sky |
-| `oak` | `#A9804F` | warm accent: sun arcs, hover, prices |
-| `lingon` | `#A8253A` | tiny accent only: focus dot, sun marker, "now" indicator |
-| `polar` | `#0E1A20` | polar-night backgrounds (dark-season hero, night portions of arcs) |
+| **Alma** (almahospitality.it) | Hero: huge light lowercase wordmark over a full-bleed quiet photograph; nav spread evenly across the top; dotted-underline "Discover ↓" link; **colour-blocked split sections** where a list on one side swaps the photograph on the other. | Single-property structure. |
+| **The Drake** (thedrake.ca) | **Mono type for facts** (dates, coordinates, durations, prices); hairline rules between data; the **label + round arrow** secondary button; horizontally scrolling card rows with two-column mono metadata; small boxed tags. | Boxed-word headlines, hand-drawn illustrations, loud colours: too much for lagom. |
+| **The Tailor** (thetailor.com) | **Serif headlines with one italic word** ("Fjords, *slowly*"); small letter-spaced eyebrows; the deep green block; the travel information architecture (journeys with duration, destinations tabbed by country, experiences in alternating image/text, testimonials with origin, FAQ accordion); **enquiry-first**: a warm accent pill in the header and on every journey. | Named "travel designers" (Gustav is a brand, not a person), gated downloads, newsletter popups. |
 
-**Type**
-- Headings: **Schibsted Grotesk** (a grotesk with Norwegian roots; set large, tight: `tracking-[-0.03em]`, `leading-[0.95]` on display sizes).
-- Long reading: **Newsreader** (soft, humanist serif; 18–20px, `leading-relaxed`, 62–68ch measure).
-- Fluid scale via `clamp()`: display 3.5→7.5rem, h1 2.5→4.5rem, h2 1.75→2.75rem, body 1.0625→1.1875rem, small caps-style labels (grotesk, 0.75rem, `tracking-[0.12em]`, uppercase) for eyebrow text.
+### Palette (all text pairings AA or better)
+| Token | Hex | Role |
+|---|---|---|
+| `birch` / `birch-50` | `#F3EFE6` / `#FBF9F4` | page / raised surfaces |
+| `ink` | `#1B2420` | text |
+| `pine` | `#2E4639` | **Sweden** block, footer, menu |
+| `fjord` | `#4A6072` | **Norway** block, horizon |
+| `heather` | `#8A5666` | **Denmark** block (lingonberry, softened) |
+| `lichen` | `#5F6B53` | **Finland** block |
+| `oak` | `#A57D4E` | sun arcs (decorative only) |
+| `lingon` | `#A3263A` | primary action pill, "now" dot. Sparingly. |
+| `polar` | `#101B21` | polar-night sections |
 
-**Layout**
-- 12-col grid, generous outer margins (`px-5` mobile → `px-[6vw]` desktop), asymmetric compositions (e.g. text on cols 2–6, image on 7–12 offset down; alternating). Max content width ~1440px; reading column ~680px.
-- Big quiet photographs: full-bleed or 7/12 width, no overlays except a subtle bottom gradient where text sits on image.
-- Vertical rhythm on an 8px base; sections separated by space and the horizon line, not boxes.
+Each country keeps its colour everywhere: destination blocks, map pins, calendar lines.
 
-**Signature: the horizon line**
-- `<Horizon />`: a single 1px `fjord` line, full bleed, appearing at consistent heights between sections so it reads as one line running through the site.
-- `<SunPath lat lng month|date />`: on key sections the line becomes a chart of the sun's elevation over 24 h. The horizon *is* elevation 0°; the curve rises above for daylight (oak stroke) and dips below for night (fjord, dashed, low opacity). Summer in Tromsø: whole arc above the line. December in Tromsø: the arc never rises; a short shallow dip. Copenhagen in winter: a short, low hump. A small lingon dot marks "now" (homepage) or solar noon (calendar). Rendered as server SVG where static, client where animated.
-- Respects `prefers-reduced-motion`; every SunPath has a text equivalent ("Daylight 4h 12m. Sunrise 10:41, sunset 14:53.").
+### Type: three voices, three jobs
+- **Albert Sans** (a grotesk drawn from Scandinavian lettering), light weight: wordmark-scale display, page titles, nav, UI.
+- **Newsreader**, light, with italics: section headlines with one italic accent word, ledes, long reading.
+- **DM Mono**: facts. Daylight, sunrise/sunset, coordinates, durations, prices, tags.
 
-**Logo**: "gustav" lowercase in Schibsted Grotesk Medium, tight tracking, with a small mark: a half-sun resting on a short horizon stroke (SVG, inherits `currentColor`; lingon variant for favicon).
+### Actions: three tiers
+1. Lingonberry pill: "Enquire", "Ask us to plan this". At most two per view.
+2. Hairline label + round arrow: "View journey", "Explore".
+3. Dotted-underline link: quiet inline moves ("Open the Light Calendar →").
 
-**Motion**: Framer Motion only for opacity/translate fades (600–900 ms, `easeOut` curves like light shifting), SunPath morphs between months, and hero image crossfade. No parallax, no scroll-jacking. All disabled under reduced motion.
+### Signature: the horizon line
+- `<Horizon />`: a 1px line, full bleed, between sections.
+- `<SunPath place day />`: the line becomes a chart of the sun's elevation over 24 h. The line is the visible horizon; daylight is an oak arc above it, night a faint dashed curve below. Midnight sun never touches the line; polar night never rises above it. A lingonberry dot marks "now". The text equivalent is in the figcaption.
+- The homepage hero sets the wordmark above the live sun path for the featured place.
 
-**Voice guardrails**: a `lib/voice.ts` banned-word list ("fairytale", "magical", "breathtaking", "winter wonderland", "hygge", "Viking") checked by a Vitest test across `/data` and `/content`.
+**Logo**: "gustav" lowercase in Albert Sans with a half sun resting on a horizon stroke.
+
+**Motion**: opacity and short translate fades only, 500–900 ms on a soft ease-out; menu fades in; nothing under reduced motion.
+
+**Voice guardrails**: a banned-word test across `/data` and `/content` ("fairytale", "magical", "breathtaking", "winter wonderland", "hygge", "Viking").
 
 ## Solar calculation (`lib/solar.ts`, no API)
 NOAA Solar Calculator algorithm (Jean Meeus, *Astronomical Algorithms*), pure TypeScript:
@@ -170,11 +181,11 @@ interface JournalMeta { slug: string; title: string; description: string; date: 
 
 ## Build order (each ends with dev-server check + commit + push)
 1. ✅ This plan.
-2. Scaffold, tokens, fonts, Logo, Horizon/SunPath, header/footer/nav, `lib/solar.ts` + tests.
-3. Homepage with live light, hero image sets, featured journeys/destinations, testimonials.
-4. Light Calendar + Slow Route Builder (map script, routing + tests).
-5. Destinations, journeys, experiences, Black Book, Sápmi, Travelling lighter, About, journal, FAQ, Legal, enquiry + API.
-6. Polish: a11y (axe, keyboard pass, screen-reader labels), SEO, Lighthouse (target ≥ 95 across categories), voice lint.
+2. ✅ Scaffold, tokens, fonts, Logo, Horizon/SunPath, header/footer/nav, `lib/solar.ts` + tests.
+3. ✅ Homepage with live light, hero image sets, featured journeys/destinations, testimonials.
+4. ✅ Light Calendar + Slow Route Builder (map script, routing + tests).
+5. ✅ Destinations, journeys, experiences, Black Book, Sápmi, Travelling lighter, About, journal, FAQ, Legal, enquiry + API.
+6. ✅ Polish: a11y (axe, keyboard pass, screen-reader labels), SEO, Lighthouse (target ≥ 95 across categories), voice lint.
 7. Deploy: push branch → Vercel preview from the Git integration; production after you merge to `main` (or via Vercel tooling if available in-session).
 
 ## Verification

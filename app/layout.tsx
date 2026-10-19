@@ -1,0 +1,55 @@
+import type { Metadata, Viewport } from "next";
+import { Albert_Sans, DM_Mono, Newsreader } from "next/font/google";
+import { JsonLd } from "@/components/editorial/JsonLd";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
+import { MotionProvider } from "@/components/layout/MotionProvider";
+import { site } from "@/config/site";
+import "./globals.css";
+
+// Latin only: every Nordic character the site uses (å, æ, ø, ä, ö, á) is in it.
+const albert = Albert_Sans({ subsets: ["latin"], variable: "--font-albert", display: "swap" });
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-newsreader",
+  display: "swap",
+});
+const dmMono = DM_Mono({ subsets: ["latin"], weight: "400", variable: "--font-dm-mono", display: "swap" });
+
+export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
+  title: { default: `${site.name} — ${site.tagline}`, template: `%s · ${site.name}` },
+  description: site.description,
+  alternates: { canonical: "/" },
+  openGraph: { siteName: site.name, locale: site.locale, type: "website" },
+  twitter: { card: "summary_large_image" },
+};
+
+export const viewport: Viewport = { themeColor: "#f3efe6" };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={`${albert.variable} ${newsreader.variable} ${dmMono.variable}`}>
+      <body>
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "TravelAgency",
+            name: site.name,
+            slogan: site.promise,
+            description: site.description,
+            url: site.url,
+            email: site.contact.email,
+            areaServed: ["Norway", "Sweden", "Denmark", "Finland"],
+          }}
+        />
+        <MotionProvider>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+        </MotionProvider>
+      </body>
+    </html>
+  );
+}
