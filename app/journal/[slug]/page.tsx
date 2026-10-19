@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/editorial/JsonLd";
 import { Photo } from "@/components/ui/Photo";
 import { ArrowLink } from "@/components/ui/Links";
 import { site } from "@/config/site";
+import { editorialImageSet } from "@/data/images";
 import { journalImage, journalSlugs, loadPost, type JournalSlug } from "@/data/journal";
 
 export const dynamicParams = false;
@@ -54,6 +55,7 @@ export default async function JournalPost({ params }: Props) {
         eyebrow="Journal"
         title={meta.title}
         lede={meta.description}
+        gallery={editorialImageSet(`journal:${slug}`)}
         meta={
           <>
             {date} · {meta.readingMinutes} min read

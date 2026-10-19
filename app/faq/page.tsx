@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { WideImage } from "@/components/ui/WideImage";
+import { editorialImageSet } from "@/data/images";
 import { JsonLd } from "@/components/editorial/JsonLd";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { ArrowLink } from "@/components/ui/Links";
@@ -29,6 +31,7 @@ export default function FaqPage() {
         }}
       />
       <PageHeader eyebrow="FAQ" title={<>Good questions, <em>plain answers.</em></>} aside={<p>If yours isn&rsquo;t here, ask us. We&rsquo;d rather you did.</p>} />
+      <WideImage image={editorialImageSet("faq")[0]} className="mb-14" />
       <div className="gutter grid-12 gap-y-16 pb-24">
         <nav aria-label="FAQ topics" className="col-span-12 md:col-span-3">
           <ul className="space-y-2 md:sticky md:top-28">

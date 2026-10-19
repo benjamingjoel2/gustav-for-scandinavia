@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { WideImage } from "@/components/ui/WideImage";
+import { editorialImageSet } from "@/data/images";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { JourneyGrid } from "@/components/journeys/JourneyGrid";
 
@@ -20,6 +22,7 @@ export default function JourneysPage() {
         }
         aside={<p>These are journeys we know work. Treat them as a first draft: we will move days, swap stays and change the season around you.</p>}
       />
+      <WideImage image={editorialImageSet("journeys-hero")[0]} className="mb-14" />
       <div className="gutter pb-24">
         <JourneyGrid />
       </div>

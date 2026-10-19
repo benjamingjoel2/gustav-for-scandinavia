@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { PillLink } from "@/components/ui/Links";
+import { Photo } from "@/components/ui/Photo";
 import { Tag } from "@/components/ui/Tag";
 import { countries } from "@/data/countries";
+import { slowRouteImage } from "@/data/images";
 import { places } from "@/data/places";
 import { slowRoutes } from "@/data/routes";
 import { monthName } from "@/lib/format";
@@ -250,7 +252,12 @@ export function RouteBuilder() {
         </h2>
         <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {slowRoutes.map((r) => (
-            <li key={r.id} className="border-t border-ink/15 pt-4">
+            <li key={r.id}>
+              {slowRouteImage(r.id) && (
+                <div className="relative mb-4 aspect-[3/2] overflow-hidden bg-birch-200">
+                  <Photo image={slowRouteImage(r.id)} ratio="3:2" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw" />
+                </div>
+              )}
               <h3 className="font-sans text-lg">{r.name}</h3>
               <p className="meta mt-2 text-stone">{r.stops.map(nameOf).join(" → ")}</p>
               <p className="mt-2">{r.description}</p>

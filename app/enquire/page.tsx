@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { WideImage } from "@/components/ui/WideImage";
+import { editorialImageSet } from "@/data/images";
 import { EnquiryForm } from "@/components/enquiry/EnquiryForm";
 
 export const metadata: Metadata = {
@@ -17,6 +19,7 @@ export default function EnquirePage() {
         </h1>
         <p className="col-span-12 text-stone md:col-span-4 md:self-end">Everything is optional except how to reach you. A planner reads every enquiry and replies personally.</p>
       </header>
+      <WideImage image={editorialImageSet("enquire")[0]} className="mb-14" />
       <div className="gutter relative pb-24">
                   <EnquiryForm />
       </div>
