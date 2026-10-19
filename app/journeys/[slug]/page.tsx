@@ -13,12 +13,13 @@ import { Tag } from "@/components/ui/Tag";
 import { site } from "@/config/site";
 import { destinations } from "@/data/destinations";
 import { experiences } from "@/data/experiences";
-import { journeyImage } from "@/data/images";
+import { destinationImage, experienceImage, galleryImages, journeyImage } from "@/data/images";
 import { itineraries } from "@/data/itineraries";
 import { journeys } from "@/data/journeys";
 import { getPlace, type PlaceId } from "@/data/places";
 import { stays } from "@/data/stays";
 import { formatMonths, monthName } from "@/lib/format";
+import type { ImageRef, JourneyDay } from "@/types/content";
 import { planRoute } from "@/lib/routing";
 import { formatDuration, formatTime, getSunTimes, type LocalDate } from "@/lib/solar";
 
@@ -48,6 +49,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+/**
+ * A photograph for each day: from the place you sleep (its hero, then its gallery) or the day's experience,
+ * never the same one twice in a journey.
+ */
+function dayImages(days: JourneyDay[], heroSrc?: string): (ImageRef | undefined)[] {
+  const used = new Set<string>(heroSrc ? [heroSrc] : []);
+  return days.map((d, i) => {
+    const destination = destinations.find((x) => x.placeId === d.placeId);
+    const placePool = destination ? [destinationImage(destination.slug), ...galleryImages(destination.slug)] : [];
+    const experiencePool = (d.experienceIds ?? []).map(experienceImage);
+    const pool = (i % 2 ? [...experiencePool, ...placePool] : [...placePool, ...experiencePool]).filter((x): x is ImageRef => !!x);
+    const pick = pool.find((x) => !used.has(x.src));
+    if (pick) used.add(pick.src);
+    return pick;
+  });
+}
+
 /** The first night of a "2–3" day label. */
 const firstDay = (label: string) => Number(label.split(/[–-]/)[0]);
 
@@ -67,6 +85,7 @@ export default async function JourneyPage({ params }: Props) {
   const sleeps = itinerary.days.map((d) => d.placeId).filter((id, i, all) => id !== all[i - 1]);
   const plan = planRoute(sleeps, { flightFree: journey.flightFree, month: itinerary.defaultMonth });
   const enquire = `/enquire?journey=${journey.slug}`;
+  const photos = dayImages(itinerary.days, image?.src);
   const related = journeys.filter((j) => j.slug !== journey.slug && j.bestMonths.some((m) => journey.bestMonths.includes(m))).slice(0, 3);
 
   return (
@@ -152,7 +171,8 @@ export default async function JourneyPage({ params }: Props) {
           </p>
         </div>
         <ol className="mt-14 border-t border-ink/15">
-          {itinerary.days.map((d) => {
+          {itinerary.days.map((d, dayIndex) => {
+            const photo = photos[dayIndex];
             const offset = firstDay(d.day) - 1;
             const date = new Date(Date.UTC(year, itinerary.defaultMonth - 1, startDay + offset));
             const light = dayLight(d.placeId, { year, month: date.getUTCMonth() + 1, day: date.getUTCDate() });
@@ -175,6 +195,11 @@ export default async function JourneyPage({ params }: Props) {
                     )}
                   </div>
                   <div className="col-span-12 space-y-3 md:col-span-3 md:col-start-10">
+                    {photo && (
+                      <div className="relative aspect-[4/3] overflow-hidden bg-birch-200">
+                        <Photo image={photo} ratio="4:3" sizes="(min-width: 768px) 25vw, 100vw" />
+                      </div>
+                    )}
                     {stay && (
                       <p className="text-[0.9375rem]">
                         <span className="meta block text-stone">Stay</span>

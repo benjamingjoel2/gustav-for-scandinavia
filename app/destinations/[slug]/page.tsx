@@ -8,6 +8,7 @@ import { MiniLightCalendar } from "@/components/light/MiniLightCalendar";
 import { modeLabel } from "@/components/route/modes";
 import { ArrowLink, DottedLink, PillLink } from "@/components/ui/Links";
 import { Photo } from "@/components/ui/Photo";
+import { Gallery } from "@/components/ui/Gallery";
 import { Tag } from "@/components/ui/Tag";
 import { site } from "@/config/site";
 import { blackBook } from "@/data/blackbook";
@@ -15,7 +16,7 @@ import { countries } from "@/data/countries";
 import { destinationDetails } from "@/data/destination-details";
 import { destinations } from "@/data/destinations";
 import { experiences } from "@/data/experiences";
-import { destinationImage } from "@/data/images";
+import { destinationImage, galleryImages } from "@/data/images";
 import { itineraries } from "@/data/itineraries";
 import { journeys } from "@/data/journeys";
 import { getPlace, places, type PlaceId } from "@/data/places";
@@ -117,6 +118,12 @@ export default async function DestinationPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+      {galleryImages(destination.slug).length > 0 && (
+        <section aria-label={`${destination.name} in pictures`} className="gutter pb-20 md:pb-28">
+          <Gallery images={galleryImages(destination.slug)} />
+        </section>
+      )}
 
       <section aria-labelledby="light-title" className="bg-polar py-20 text-birch-50 md:py-28">
         <div className="gutter grid-12 gap-y-10">
