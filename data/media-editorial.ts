@@ -26,9 +26,7 @@ export const editorialImages: Record<string, SourcedImage[]> = {
     u("1599728779904-448a831701cb", "a-flag-flying-in-the-wind-with-a-blue-sky-in-the-background-cWL0SNSqiGs", "Sámi flag in red, blue, green and yellow flying from a pole against a clear blue sky", "Thom Reijnders"),
   ],
   "travelling-lighter": [
-    u("1659424765837-003b08e79cf4", "a-train-on-a-bridge-mGxkDOax02g", "Passenger train crossing a stone arch viaduct over a wooded valley under grey cloud", "Karl Paul Baldacchino"),
     u("1749045418640-0b36dd5f1986", "a-bicycle-rests-by-a-tranquil-lake-AxfLIsChl9Y", "Bicycle leaning against a bench on a jetty by a lake with birch-lined shores", "Arpit Sharma"),
-    u("1656238287594-bd60068c76e7", "a-large-boat-on-the-water-rom2EbGCaVA", "Blue and white car ferry crossing open water with a low coastline behind", "Franz Wender"),
   ],
   "about": [
     u("1755912551967-1c6006e8a009", "a-solitary-boathouse-on-calm-water-at-dusk-YWH-SQ9s1Ao", "Wooden boathouse at the end of a long jetty on still water at dusk", "Iain"),
@@ -53,7 +51,6 @@ export const editorialImages: Record<string, SourcedImage[]> = {
     u("1699559510594-12624b72312c", "a-cup-of-coffee-and-some-pastries-on-a-table-G36pUixWrOA", "Cup of milky coffee on a café table among buns and pastries", "simon follin"),
   ],
   "journal:midnight-sun-or-northern-lights": [
-    u("1525642650051-4e79b2eecd7c", "flower-field-near-the-body-of-water-during-golden-hour-DxRXjBQAb8I", "Fireweed in flower on a shore below an orange night sky over a calm bay", "Vidar Nordli-Mathisen"),
     u("1643611657752-fb0ce6989d88", "a-cabin-in-the-snow-under-a-green-aurora-bore-InET0AwCX48", "Green aurora over a snow-covered wooden cabin with one lit window", "Hendrik Morkel"),
   ],
   "journal:oslo-to-bergen-why-the-train-wins": [
@@ -61,7 +58,6 @@ export const editorialImages: Record<string, SourcedImage[]> = {
     u("1752836984460-9fffb7e3f47d", "snow-capped-mountains-and-a-lake-framed-by-windows-kwLc2ebmV1w", "Snow-patched mountains and a lake seen through train windows", "Sylwia Bartyzel"),
   ],
   "journal:sauna-like-a-finn": [
-    u("1565357938981-b9201b389eaa", "brown-wooden-dock-at-a-lake-ApwuEaZHGqA", "Fresh birch whisks lying on a wooden jetty over a lake edged with forest", "Santtu Perkiö"),
     u("1743286159555-ea765c1bc5e6", "a-sauna-with-rocks-a-bucket-and-wood-NRZ1bc4h9ME", "Dim sauna with a heap of stove stones, a wooden bucket and lit wooden benches", "Anne Nygård"),
   ],
   "journal:scandinavia-without-flying": [

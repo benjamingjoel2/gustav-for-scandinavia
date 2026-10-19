@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { useReducedMotion } from "framer-motion";
 import { SunPath } from "@/components/horizon/SunPath";
+import { Photo } from "@/components/ui/Photo";
+import { momentImage } from "@/data/images";
 import { journeys } from "@/data/journeys";
 import { momentsIn } from "@/data/light-moments";
 import { calendarPlaceIds, getPlace, type PlaceId } from "@/data/places";
@@ -147,6 +149,11 @@ export function LightCalendar({ year, initialDay }: { year: number; initialDay: 
         <ul className="mt-8 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {moments.map((m) => (
             <li key={m.id} className="border-t border-birch-50/25 pt-5">
+              {momentImage(m.id) && (
+                <div className="relative mb-5 aspect-[4/3] overflow-hidden bg-black/20">
+                  <Photo image={momentImage(m.id)} ratio="4:3" sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 100vw" />
+                </div>
+              )}
               <p className="meta text-oak">{m.where}</p>
               <h3 className="mt-3 font-serif text-2xl font-light">{m.label}</h3>
               <p className="mt-3 text-birch-50/85">{m.text}</p>

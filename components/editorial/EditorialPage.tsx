@@ -1,8 +1,24 @@
 import type { ReactNode } from "react";
 import { Horizon } from "@/components/horizon/Horizon";
+import { Gallery } from "@/components/ui/Gallery";
+import { Photo } from "@/components/ui/Photo";
+import type { ImageRef } from "@/types/content";
+
+interface EditorialPageProps {
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  meta?: ReactNode;
+  children: ReactNode;
+  aside?: ReactNode;
+  /** Full-bleed photograph under the title. */
+  hero?: ImageRef;
+  /** Photographs after the text. */
+  gallery?: ImageRef[];
+}
 
 /** Long-form page: title, a lede, and a reading column. Used for MDX pages and journal posts. */
-export function EditorialPage({ eyebrow, title, lede, meta, children, aside }: { eyebrow: string; title: string; lede?: string; meta?: ReactNode; children: ReactNode; aside?: ReactNode }) {
+export function EditorialPage({ eyebrow, title, lede, meta, children, aside, hero, gallery = [] }: EditorialPageProps) {
   return (
     <article className="pt-16 md:pt-[4.5rem]">
       <header className="gutter grid-12 gap-y-6 pb-12 pt-16 md:pt-24">
@@ -11,11 +27,25 @@ export function EditorialPage({ eyebrow, title, lede, meta, children, aside }: {
         {lede && <p className="lede col-span-12 max-w-3xl text-ink/80 md:col-span-8">{lede}</p>}
         {meta && <div className="meta col-span-12 text-stone">{meta}</div>}
       </header>
-      <Horizon />
+      {hero ? (
+        <figure>
+          <div className="relative aspect-[16/10] max-h-[78svh] w-full overflow-hidden bg-birch-200 md:aspect-[21/9]">
+            <Photo image={hero} sizes="100vw" eager />
+          </div>
+          <figcaption className="gutter meta mt-2 text-stone">{hero.credit}</figcaption>
+        </figure>
+      ) : (
+        <Horizon />
+      )}
       <div className="gutter grid-12 gap-y-12 py-16 md:py-20">
         <div className="col-span-12 max-w-[68ch] md:col-span-8 lg:col-span-7 lg:col-start-2">{children}</div>
         {aside && <aside className="col-span-12 md:col-span-4 lg:col-span-3 lg:col-start-10">{aside}</aside>}
       </div>
+      {gallery.length > 0 && (
+        <div className="gutter pb-20 md:pb-28">
+          <Gallery images={gallery} />
+        </div>
+      )}
     </article>
   );
 }
