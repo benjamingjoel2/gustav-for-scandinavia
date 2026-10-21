@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { WideImage } from "@/components/ui/WideImage";
-import { editorialImageSet } from "@/data/images";
+import { editorialImageSet, journeyImage } from "@/data/images";
+import { journeys } from "@/data/journeys";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { JourneyGrid } from "@/components/journeys/JourneyGrid";
 
@@ -24,7 +25,7 @@ export default function JourneysPage() {
       />
       <WideImage image={editorialImageSet("journeys-hero")[0]} className="mb-14" />
       <div className="gutter pb-24">
-        <JourneyGrid />
+        <JourneyGrid images={Object.fromEntries(journeys.map((j) => [j.slug, journeyImage(j.slug)]))} />
       </div>
     </div>
   );

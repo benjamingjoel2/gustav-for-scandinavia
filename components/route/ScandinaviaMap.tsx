@@ -1,9 +1,6 @@
-"use client";
-
 import { places } from "@/data/places";
 import type { PlannedLeg } from "@/lib/routing";
-import { countryTone } from "@/lib/tones";
-import { MAP_HEIGHT, MAP_WIDTH, SVALBARD_INSET, countryPaths, mapPoints, neighbourPaths, svalbardPath } from "./map-data";
+import { MAP_HEIGHT, MAP_SRC, MAP_WIDTH, mapPoints } from "./map-data";
 import { modeDash } from "./modes";
 
 /** Places labelled on the map at all times; others show their name on hover, focus or selection. */
@@ -31,18 +28,10 @@ function legPath(leg: PlannedLeg) {
 export function ScandinaviaMap({ stops, legs, onToggle }: MapProps) {
   return (
     <div className="relative overflow-hidden" style={{ aspectRatio: `${MAP_WIDTH} / ${MAP_HEIGHT}` }}>
+      {/* The outlines are a static, cached file; only the route is drawn per page. */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- decorative SVG, no resizing needed */}
+      <img src={MAP_SRC} alt="" aria-hidden width={MAP_WIDTH} height={MAP_HEIGHT} className="absolute inset-0 h-full w-full" />
       <svg viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} className="absolute inset-0 h-full w-full" aria-hidden>
-        {neighbourPaths.map((d, i) => (
-          <path key={i} d={d} fill="var(--color-birch-200)" />
-        ))}
-        {countryPaths.map((c, i) => (
-          <path key={i} d={c.d} fill={`var(--color-${countryTone[c.country]})`} fillOpacity={0.24} stroke={`var(--color-${countryTone[c.country]})`} strokeOpacity={0.45} strokeWidth={0.75} />
-        ))}
-        <rect x={SVALBARD_INSET.x} y={SVALBARD_INSET.y} width={SVALBARD_INSET.w} height={SVALBARD_INSET.h} fill="var(--color-birch-50)" stroke="var(--color-ink)" strokeOpacity={0.2} />
-        <path d={svalbardPath} fill="var(--color-fjord)" fillOpacity={0.16} stroke="var(--color-fjord)" strokeOpacity={0.45} strokeWidth={0.75} />
-        <text x={SVALBARD_INSET.x + 10} y={SVALBARD_INSET.y + SVALBARD_INSET.h - 10} className="fill-stone font-mono text-[11px] uppercase tracking-wider">
-          Svalbard, not to scale
-        </text>
         {legs.map((leg, i) => (
           <path
             key={`${leg.id}-${i}`}

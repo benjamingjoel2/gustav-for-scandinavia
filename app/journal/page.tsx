@@ -22,7 +22,7 @@ export default async function JournalIndex() {
           <li key={post.slug} className={i === 0 ? "md:col-span-2" : ""}>
             <Link href={`/journal/${post.slug}`} className="group grid gap-6 md:grid-cols-2 md:items-end">
               <div className={`relative overflow-hidden bg-birch-200 ${i === 0 ? "aspect-[3/2] md:col-span-1" : "aspect-[4/3] md:col-span-2"}`}>
-                <Photo image={journalImage(post.meta.image)} sizes="(min-width: 768px) 50vw, 100vw" className="transition-transform duration-[1.6s] ease-light group-hover:scale-[1.03]" />
+                <Photo image={journalImage(post.meta.image)} eager={i === 0} sizes="(min-width: 768px) 50vw, 100vw" className="transition-transform duration-[1.6s] ease-light group-hover:scale-[1.03]" />
               </div>
               <div className={i === 0 ? "" : "md:col-span-2"}>
                 <p className="meta text-stone">

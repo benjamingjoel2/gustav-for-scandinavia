@@ -37,8 +37,9 @@ interface SunPathProps {
  * Above the line is daylight; below it, night. Midnight sun never touches the line; polar night never rises above it.
  */
 export function SunPath({ place, day, markerMinute, labels = true, className = "", height = 160 }: SunPathProps) {
-  const points = getSunPath(day, place, 10);
-  const d = points.map((p, i) => `${i ? "L" : "M"}${((p.minute / 1440) * W).toFixed(1)},${y(p.elevation).toFixed(1)}`).join("");
+  // Small drawings need fewer points; it keeps the HTML light where many sun paths share a page.
+  const points = getSunPath(day, place, height <= 90 ? 20 : 10);
+  const d = points.map((p, i) => `${i ? "L" : "M"}${Math.round((p.minute / 1440) * W)},${y(p.elevation).toFixed(1)}`).join("");
   const times = getSunTimes(day, place.lat, place.lng);
   const id = `sp-${place.id}-${day.year}${day.month}${day.day}`;
 
@@ -46,7 +47,7 @@ export function SunPath({ place, day, markerMinute, labels = true, className = "
     markerMinute === undefined
       ? undefined
       : (() => {
-          const i = Math.min(points.length - 1, Math.round(markerMinute / 10));
+          const i = Math.min(points.length - 1, Math.round(markerMinute / (1440 / (points.length - 1))));
           return { left: (markerMinute / 1440) * 100, top: (y(points[i].elevation) / H) * 100, up: points[i].elevation > 0 };
         })();
 

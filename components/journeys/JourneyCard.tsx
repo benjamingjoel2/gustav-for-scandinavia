@@ -2,17 +2,17 @@ import Link from "next/link";
 import { Price } from "@/components/ui/Currency";
 import { Photo } from "@/components/ui/Photo";
 import { ArrowLabel, Tag } from "@/components/ui/Tag";
-import { journeyImage } from "@/data/images";
 import { formatMonths } from "@/lib/format";
-import type { JourneySummary } from "@/types/content";
+import type { ImageRef, JourneySummary } from "@/types/content";
 
-export function JourneyCard({ journey, className = "" }: { journey: JourneySummary; className?: string }) {
+/** The image is passed in so client lists don't pull the whole photo catalogue into the browser. */
+export function JourneyCard({ journey, image, className = "" }: { journey: JourneySummary; image?: ImageRef; className?: string }) {
   return (
     <article className={className}>
       <Link href={`/journeys/${journey.slug}`} className="group relative block">
         <div className="relative aspect-[4/5] overflow-hidden bg-birch-200">
           <Photo
-            image={journeyImage(journey.slug)}
+            image={image}
             ratio="4:5"
             sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 80vw"
             className="transition-transform duration-[1.6s] ease-light group-hover:scale-[1.03]"

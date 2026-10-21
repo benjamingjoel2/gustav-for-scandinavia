@@ -7,24 +7,23 @@ import { Photo } from "@/components/ui/Photo";
 import { ArrowLink } from "@/components/ui/Links";
 import { countries } from "@/data/countries";
 import { destinationsIn } from "@/data/destinations";
-import { destinationImage } from "@/data/images";
 import { getPlace, type PlaceId } from "@/data/places";
 import { formatCoords, formatMonths } from "@/lib/format";
 import { countryTone, toneClasses } from "@/lib/tones";
-import type { CountryId } from "@/types/content";
+import type { CountryId, ImageRef } from "@/types/content";
 
 /**
  * Colour-blocked destinations: pick a country (the block takes its colour),
  * then hover or focus a place to bring up its photograph.
  */
-export function CountryExplorer() {
+export function CountryExplorer({ images }: { images: Record<string, ImageRef | undefined> }) {
   const reduceMotion = useReducedMotion();
   const [country, setCountry] = useState<CountryId>("norway");
   const list = destinationsIn(country);
   const [activeSlug, setActiveSlug] = useState(list[0].slug);
   const active = list.find((d) => d.slug === activeSlug) ?? list[0];
   const place = getPlace(active.placeId as PlaceId);
-  const image = destinationImage(active.slug);
+  const image = images[active.slug];
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const select = (id: CountryId) => {

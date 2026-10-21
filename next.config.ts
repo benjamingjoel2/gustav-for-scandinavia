@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   images: {
     loader: "custom",
     loaderFile: "./lib/image-loader.ts",
+    // Stop at 2560: full-bleed photos on very large screens don't need a 3840px file.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1600, 1920, 2560],
+    // 65 by default (see lib/image-loader.ts); 55 for full-bleed photos under a gradient.
+    qualities: [55, 65],
   },
 };
 

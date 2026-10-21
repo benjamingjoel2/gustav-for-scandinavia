@@ -3,7 +3,6 @@ import { Albert_Sans, DM_Mono, Newsreader } from "next/font/google";
 import { JsonLd } from "@/components/editorial/JsonLd";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { MotionProvider } from "@/components/layout/MotionProvider";
 import { site } from "@/config/site";
 import "./globals.css";
 
@@ -14,8 +13,10 @@ const newsreader = Newsreader({
   style: ["normal", "italic"],
   variable: "--font-newsreader",
   display: "swap",
+  // Not preloaded: it would compete with the opening photograph. Text paints at once in a size-matched fallback.
+  preload: false,
 });
-const dmMono = DM_Mono({ subsets: ["latin"], weight: "400", variable: "--font-dm-mono", display: "swap" });
+const dmMono = DM_Mono({ subsets: ["latin"], weight: "400", variable: "--font-dm-mono", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -31,6 +32,11 @@ export const viewport: Viewport = { themeColor: "#f3efe6" };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${albert.variable} ${newsreader.variable} ${dmMono.variable}`}>
+      <head>
+        {/* Photographs come from the Unsplash CDN: open the connection before the first image is requested. */}
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://images.unsplash.com" />
+      </head>
       <body>
         <JsonLd
           data={{
@@ -44,11 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             areaServed: ["Norway", "Sweden", "Denmark", "Finland"],
           }}
         />
-        <MotionProvider>
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-        </MotionProvider>
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
       </body>
     </html>
   );
