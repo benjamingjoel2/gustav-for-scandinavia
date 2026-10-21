@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
-import { useReducedMotion } from "framer-motion";
 import { SunPath } from "@/components/horizon/SunPath";
 import { Photo } from "@/components/ui/Photo";
-import { momentImage } from "@/data/images";
 import { journeys } from "@/data/journeys";
 import { momentsIn } from "@/data/light-moments";
 import { calendarPlaceIds, getPlace, type PlaceId } from "@/data/places";
 import { monthName } from "@/lib/format";
 import { formatDuration, getSunTimes, type LocalDate } from "@/lib/solar";
+import type { ImageRef } from "@/types/content";
+import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 
 
 const DAY_MS = 86_400_000;
@@ -37,8 +37,8 @@ function daylightText(placeId: PlaceId, day: LocalDate) {
  * Drag through the year and watch the light change, south to north.
  * Works with the slider's arrow keys (a day), Page Up/Down (a month), Home/End, or the month buttons.
  */
-export function LightCalendar({ year, initialDay }: { year: number; initialDay: number }) {
-  const reduceMotion = useReducedMotion();
+export function LightCalendar({ year, initialDay, momentImages }: { year: number; initialDay: number; momentImages: Record<string, ImageRef | undefined> }) {
+  const reduceMotion = usePrefersReducedMotion();
   const [dayOfYear, setDayOfYear] = useState(initialDay);
   const [playing, setPlaying] = useState(false);
   const raf = useRef<number | null>(null);
@@ -149,9 +149,9 @@ export function LightCalendar({ year, initialDay }: { year: number; initialDay: 
         <ul className="mt-8 grid gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {moments.map((m) => (
             <li key={m.id} className="border-t border-birch-50/25 pt-5">
-              {momentImage(m.id) && (
+              {momentImages[m.id] && (
                 <div className="relative mb-5 aspect-[4/3] overflow-hidden bg-black/20">
-                  <Photo image={momentImage(m.id)} ratio="4:3" sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 100vw" />
+                  <Photo image={momentImages[m.id]} ratio="4:3" sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 100vw" />
                 </div>
               )}
               <p className="meta text-oak">{m.where}</p>

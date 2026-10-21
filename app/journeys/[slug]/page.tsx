@@ -105,7 +105,7 @@ export default async function JourneyPage({ params }: Props) {
 
       <header className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden bg-polar text-birch-50">
         <div className="absolute inset-0 -z-10">
-          <Photo image={image} sizes="100vw" eager />
+          <Photo image={image} sizes="100vw" eager quality={55} />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(16_27_33/0.4)_0%,rgb(16_27_33/0)_35%,rgb(16_27_33/0.75)_100%)]" />
         </div>
         <div className="gutter grid-12 gap-y-6 pb-10 pt-32">
@@ -283,7 +283,7 @@ export default async function JourneyPage({ params }: Props) {
           <ul className="mt-8 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((j) => (
               <li key={j.slug}>
-                <JourneyCard journey={j} />
+                <JourneyCard journey={j} image={journeyImage(j.slug)} />
               </li>
             ))}
           </ul>

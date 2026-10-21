@@ -4,7 +4,7 @@
 export default function imageLoader({ src, width, quality }: { src: string; width: number; quality?: number }) {
   if (src.startsWith("https://images.unsplash.com/")) {
     const join = src.includes("?") ? "&" : "?";
-    return `${src}${join}w=${width}&q=${quality ?? 70}&auto=format&fit=crop`;
+    return `${src}${join}w=${width}&q=${quality ?? 65}&auto=format&fit=crop`;
   }
   return src;
 }

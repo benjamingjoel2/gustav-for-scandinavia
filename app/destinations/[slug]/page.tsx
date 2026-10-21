@@ -16,7 +16,7 @@ import { countries } from "@/data/countries";
 import { destinationDetails } from "@/data/destination-details";
 import { destinations } from "@/data/destinations";
 import { experiences } from "@/data/experiences";
-import { destinationImage, galleryImages } from "@/data/images";
+import { destinationImage, galleryImages, journeyImage } from "@/data/images";
 import { itineraries } from "@/data/itineraries";
 import { journeys } from "@/data/journeys";
 import { getPlace, places, type PlaceId } from "@/data/places";
@@ -92,7 +92,7 @@ export default async function DestinationPage({ params }: Props) {
       />
       <header className="relative isolate flex min-h-[80svh] flex-col justify-end overflow-hidden bg-polar text-birch-50">
         <div className="absolute inset-0 -z-10">
-          <Photo image={image} sizes="100vw" eager />
+          <Photo image={image} sizes="100vw" eager quality={55} />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(16_27_33/0.4)_0%,rgb(16_27_33/0)_40%,rgb(16_27_33/0.7)_100%)]" />
         </div>
         <div className="gutter pb-10 pt-32">
@@ -267,7 +267,7 @@ export default async function DestinationPage({ params }: Props) {
             <ul className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
               {relatedJourneys.map((j) => (
                 <li key={j.slug}>
-                  <JourneyCard journey={j} />
+                  <JourneyCard journey={j} image={journeyImage(j.slug)} />
                 </li>
               ))}
             </ul>

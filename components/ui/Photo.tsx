@@ -9,16 +9,19 @@ interface PhotoProps {
   eager?: boolean;
   /** Crop on the image CDN to the frame's aspect ratio, e.g. "4:5", so it isn't upscaled to fill. */
   ratio?: string;
+  /** 1–100. Full-bleed photos under a gradient can go lower without visible loss. */
+  quality?: number;
 }
 
 /** A photograph that fills its (relatively positioned) parent. Falls back to a quiet fjord tone. */
-export function Photo({ image, sizes, className = "", eager = false, ratio }: PhotoProps) {
+export function Photo({ image, sizes, className = "", eager = false, ratio, quality }: PhotoProps) {
   if (!image) return <div aria-hidden className={`absolute inset-0 bg-fjord/40 ${className}`} />;
   return (
     <Image
       src={ratio && image.src.startsWith("https://images.unsplash.com/") ? `${image.src}?ar=${ratio}` : image.src}
       alt={image.alt}
       fill
+      quality={quality}
       sizes={sizes}
       loading={eager ? "eager" : "lazy"}
       fetchPriority={eager ? "high" : undefined}

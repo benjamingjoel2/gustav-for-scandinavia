@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { LightCalendar } from "@/components/light/LightCalendar";
 import { ArrowLink } from "@/components/ui/Links";
+import { momentImage } from "@/data/images";
+import { lightMoments } from "@/data/light-moments";
 import { calendarPlaceIds, getPlace } from "@/data/places";
 import { monthName } from "@/lib/format";
 import { formatDuration, getPolarPeriods, getSunTimes, type DateRange } from "@/lib/solar";
@@ -38,7 +40,7 @@ export default function LightCalendarPage() {
         </p>
       </header>
 
-      <LightCalendar year={year} initialDay={dayOfYear} />
+      <LightCalendar year={year} initialDay={dayOfYear} momentImages={Object.fromEntries(lightMoments.map((m) => [m.id, momentImage(m.id)]))} />
 
       <section aria-labelledby="table-title" className="gutter border-t border-birch-50/15 py-16">
         <h2 id="table-title" className="headline text-[clamp(1.6rem,1.2rem+1.4vw,2.4rem)]">
