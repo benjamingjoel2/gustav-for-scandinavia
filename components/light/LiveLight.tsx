@@ -4,7 +4,7 @@ import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SunPath } from "@/components/horizon/SunPath";
 import { DottedLink } from "@/components/ui/Links";
-import { Photo } from "@/components/ui/Photo";
+import { Photo, preloadPhoto } from "@/components/ui/Photo";
 import { site } from "@/config/site";
 import { heroImages } from "@/data/media";
 import { getPlace, liveLightPlaceIds } from "@/data/places";
@@ -88,6 +88,9 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
   }, []);
   // Once the page has loaded, fetch the next slide's photograph ahead of time, so it is ready when the slide changes.
   const upcoming = lightAt((index + 1) % liveLightPlaceIds.length, now).image;
+  useEffect(() => {
+    if (loaded && upcoming) preloadPhoto(upcoming, "100vw", "low");
+  }, [loaded, upcoming]);
 
   const choose = (i: number) => {
     setIndex(i);
@@ -118,11 +121,6 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
           </m.div>
         )}
       </AnimatePresence>
-      {loaded && upcoming && upcoming.src !== image?.src && (
-        <div className="absolute inset-0 -z-20 opacity-0">
-          <Photo image={upcoming} sizes="100vw" background />
-        </div>
-      )}
       <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(16_27_33/0.45)_0%,rgb(16_27_33/0.05)_35%,rgb(16_27_33/0.25)_55%,rgb(16_27_33/0.8)_100%)]" />
 
       <div className="gutter pt-24 md:pt-28">
