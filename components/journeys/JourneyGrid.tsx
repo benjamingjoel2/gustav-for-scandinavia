@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { journeys } from "@/data/journeys";
+import type { ImageRef } from "@/types/content";
 import { JourneyCard } from "./JourneyCard";
 
 const filters = [
@@ -11,7 +12,7 @@ const filters = [
   { id: "summer", label: "Summer light", test: (j: (typeof journeys)[number]) => j.bestMonths.some((m) => [5, 6, 7, 8].includes(m)) },
 ] as const;
 
-export function JourneyGrid() {
+export function JourneyGrid({ images }: { images: Record<string, ImageRef | undefined> }) {
   const [active, setActive] = useState<(typeof filters)[number]["id"]>("all");
   const shown = journeys.filter(filters.find((f) => f.id === active)!.test);
   return (
@@ -35,7 +36,7 @@ export function JourneyGrid() {
       <ul className="mt-10 grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
         {shown.map((j) => (
           <li key={j.slug}>
-            <JourneyCard journey={j} />
+            <JourneyCard journey={j} image={images[j.slug]} />
           </li>
         ))}
       </ul>

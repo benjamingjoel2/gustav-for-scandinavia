@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { Logo } from "@/components/brand/Logo";
 import { menuGroups, overlayHeaderRoutes, primaryNav, site } from "@/config/site";
 
@@ -13,7 +12,6 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   const panel = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -108,19 +106,15 @@ export function Header() {
         </div>
       </header>
 
-      <AnimatePresence>
-        {open && (
-          <m.div
+      {/* A plain CSS fade keeps animation code off every page; reduced motion is handled globally. */}
+      {open && (
+          <div
             ref={panel}
             id="site-menu"
             role="dialog"
             aria-modal="true"
             aria-label="Menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.5, ease: [0.22, 0.61, 0.36, 1] }}
-            className="fixed inset-0 z-50 overflow-y-auto bg-pine font-sans text-birch-50"
+            className="animate-fade-in fixed inset-0 z-50 overflow-y-auto bg-pine font-sans text-birch-50"
           >
             <div className="gutter flex h-16 items-center md:h-[4.5rem]">
               <Link href="/" className="text-[1.65rem]" onClick={() => setOpen(false)}>
@@ -150,9 +144,8 @@ export function Header() {
             <div className="gutter pb-12">
               <p className="lede italic text-birch-50/80">{site.promise}</p>
             </div>
-          </m.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
     </>
   );
 }

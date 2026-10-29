@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { RouteBuilder } from "@/components/route/RouteBuilder";
+import { slowRouteImage } from "@/data/images";
+import { slowRoutes } from "@/data/routes";
 
 export const metadata: Metadata = {
   title: "Slow Route Builder",
@@ -21,7 +23,7 @@ export default function RouteBuilderPage() {
         </p>
       </header>
       <div className="gutter pb-24">
-                  <RouteBuilder />
+                  <RouteBuilder routeImages={Object.fromEntries(slowRoutes.map((r) => [r.id, slowRouteImage(r.id)]))} />
       </div>
     </div>
   );

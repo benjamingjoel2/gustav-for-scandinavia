@@ -6,14 +6,13 @@ import { PillLink } from "@/components/ui/Links";
 import { Photo } from "@/components/ui/Photo";
 import { Tag } from "@/components/ui/Tag";
 import { countries } from "@/data/countries";
-import { slowRouteImage } from "@/data/images";
 import { places } from "@/data/places";
 import { slowRoutes } from "@/data/routes";
 import { monthName } from "@/lib/format";
 import { planRoute, type PlannedLeg } from "@/lib/routing";
 import { useInitialUrlParams } from "@/lib/use-url-params";
 import { formatDuration } from "@/lib/solar";
-import type { Month } from "@/types/content";
+import type { ImageRef, Month } from "@/types/content";
 import { modeLabel } from "./modes";
 import { ScandinaviaMap } from "./ScandinaviaMap";
 
@@ -66,7 +65,7 @@ function PlaceList({ stops, onToggle }: { stops: string[]; onToggle: (id: string
  * Pick places on the map (or from the list); the builder joins them by train, ferry, coastal ship or car.
  * State lives in the URL so a route can be shared or sent to the enquiry form.
  */
-export function RouteBuilder() {
+export function RouteBuilder({ routeImages }: { routeImages: Record<string, ImageRef | undefined> }) {
   const [state, setState] = useState<{ stops: string[]; flightFree: boolean; month?: Month }>({ stops: [], flightFree: true });
   // A shared link (?stops=…&flights=1&month=7) restores its route; afterwards the URL mirrors local state.
   useInitialUrlParams((params) => {
@@ -253,9 +252,9 @@ export function RouteBuilder() {
         <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {slowRoutes.map((r) => (
             <li key={r.id}>
-              {slowRouteImage(r.id) && (
+              {routeImages[r.id] && (
                 <div className="relative mb-4 aspect-[3/2] overflow-hidden bg-birch-200">
-                  <Photo image={slowRouteImage(r.id)} ratio="3:2" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw" />
+                  <Photo image={routeImages[r.id]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw" />
                 </div>
               )}
               <h3 className="font-sans text-lg">{r.name}</h3>

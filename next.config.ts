@@ -3,9 +3,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
-  images: {
-    loader: "custom",
-    loaderFile: "./lib/image-loader.ts",
+  async headers() {
+    // Photo files never change under the same name (scripts/build-photos.ts), so browsers and the CDN can keep them.
+    return [{ source: "/photos/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }] }];
   },
 };
 

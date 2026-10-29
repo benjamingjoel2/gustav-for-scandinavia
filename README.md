@@ -37,5 +37,6 @@ Everything marked `placeholder: true` (Black Book entries, stays, testimonials) 
 
 - **Map**: `components/route/map-data.ts` is generated from Natural Earth 1:50m (public domain) by `npm run build:map`.
 - **Enquiries** go to `app/api/enquiry/route.ts`, which validates and logs them. Connecting a CRM is a TODO there.
-- **Site URL** for canonical links and the sitemap: set `NEXT_PUBLIC_SITE_URL` in Vercel once the domain is chosen.
+- **Photos** are served from `public/photos`, not from Unsplash. After adding or changing a photo in `data/`, run `npm run build:photos` and commit the new files (`lib/photos.test.ts` fails until you do).
+- **Domain**: the site lives at https://gustav.tourground.com (DNS for tourground.com is on Vercel). `NEXT_PUBLIC_SITE_URL` overrides it.
 - **Brand voice** is checked by `lib/voice.test.ts` (no "magical", "breathtaking", "hygge"…).

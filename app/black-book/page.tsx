@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { BlackBook } from "@/components/blackbook/BlackBook";
 import { PageHeader } from "@/components/editorial/PageHeader";
 import { WideImage } from "@/components/ui/WideImage";
-import { editorialImageSet } from "@/data/images";
+import { editorialImageSet, themeImages } from "@/data/images";
+import type { Theme } from "@/types/content";
+
+const THEMES: Theme[] = ["restaurant", "bakery", "sauna", "design", "architecture", "cabin", "island", "gallery"];
 
 export const metadata: Metadata = {
   title: "Gustav's Black Book",
@@ -29,7 +32,7 @@ export default function BlackBookPage() {
       />
       <WideImage image={editorialImageSet("black-book-hero")[0]} className="mb-14" />
       <div className="gutter pb-24">
-        <BlackBook />
+        <BlackBook themeImages={Object.fromEntries(THEMES.map((t) => [t, themeImages(t)])) as Record<Theme, ReturnType<typeof themeImages>>} />
       </div>
     </div>
   );

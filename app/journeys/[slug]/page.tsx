@@ -197,7 +197,7 @@ export default async function JourneyPage({ params }: Props) {
                   <div className="col-span-12 space-y-3 md:col-span-3 md:col-start-10">
                     {photo && (
                       <div className="relative aspect-[4/3] overflow-hidden bg-birch-200">
-                        <Photo image={photo} ratio="4:3" sizes="(min-width: 768px) 25vw, 100vw" />
+                        <Photo image={photo} sizes="(min-width: 768px) 25vw, 100vw" />
                       </div>
                     )}
                     {stay && (
@@ -283,7 +283,7 @@ export default async function JourneyPage({ params }: Props) {
           <ul className="mt-8 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((j) => (
               <li key={j.slug}>
-                <JourneyCard journey={j} />
+                <JourneyCard journey={j} image={journeyImage(j.slug)} />
               </li>
             ))}
           </ul>

@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SunPath } from "@/components/horizon/SunPath";
 import { DottedLink } from "@/components/ui/Links";
+import { Photo, preloadPhoto } from "@/components/ui/Photo";
 import { site } from "@/config/site";
 import { heroImages } from "@/data/media";
 import { getPlace, liveLightPlaceIds } from "@/data/places";
@@ -57,6 +57,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
   const [paused, setPaused] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [announcement, setAnnouncement] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const tick = () => setNow(Date.now());
@@ -76,6 +77,20 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
   }, [rotating]);
 
   const { place, day, times, image, minute } = lightAt(index, now);
+  useEffect(() => {
+    const onLoad = () => setLoaded(true);
+    if (document.readyState === "complete") {
+      const id = setTimeout(onLoad);
+      return () => clearTimeout(id);
+    }
+    window.addEventListener("load", onLoad);
+    return () => window.removeEventListener("load", onLoad);
+  }, []);
+  // Once the page has loaded, fetch the next slide's photograph ahead of time, so it is ready when the slide changes.
+  const upcoming = lightAt((index + 1) % liveLightPlaceIds.length, now).image;
+  useEffect(() => {
+    if (loaded && upcoming) preloadPhoto(upcoming, "100vw", "low");
+  }, [loaded, upcoming]);
 
   const choose = (i: number) => {
     setIndex(i);
@@ -102,16 +117,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
       <AnimatePresence initial={false}>
         {image && (
           <m.div key={image.src} className="absolute inset-0 -z-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={fade}>
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              sizes="100vw"
-              fetchPriority={index === 0 ? "high" : "auto"}
-              loading={index === 0 ? "eager" : "lazy"}
-              className="object-cover"
-              style={{ objectPosition: image.focus ?? "50% 50%" }}
-            />
+            <Photo image={image} sizes="100vw" eager={index === 0} />
           </m.div>
         )}
       </AnimatePresence>

@@ -16,7 +16,7 @@ import { countries } from "@/data/countries";
 import { destinationDetails } from "@/data/destination-details";
 import { destinations } from "@/data/destinations";
 import { experiences } from "@/data/experiences";
-import { destinationImage, galleryImages } from "@/data/images";
+import { destinationImage, galleryImages, journeyImage } from "@/data/images";
 import { itineraries } from "@/data/itineraries";
 import { journeys } from "@/data/journeys";
 import { getPlace, places, type PlaceId } from "@/data/places";
@@ -267,7 +267,7 @@ export default async function DestinationPage({ params }: Props) {
             <ul className="mt-10 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
               {relatedJourneys.map((j) => (
                 <li key={j.slug}>
-                  <JourneyCard journey={j} />
+                  <JourneyCard journey={j} image={journeyImage(j.slug)} />
                 </li>
               ))}
             </ul>

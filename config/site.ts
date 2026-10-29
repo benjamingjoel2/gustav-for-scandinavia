@@ -4,13 +4,11 @@ export const site = {
   promise: "Follow the light.",
   description:
     "Private journeys through Norway, Sweden, Denmark and Finland. Slowly, by train, boat and on foot, following the light.",
-  // Set NEXT_PUBLIC_SITE_URL once the domain is chosen; Vercel's production URL is used until then.
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL ??
-    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
+  // NEXT_PUBLIC_SITE_URL overrides the domain, e.g. for a staging copy.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL ? "https://gustav.tourground.com" : "http://localhost:3000"),
   locale: "en_GB",
   contact: {
-    email: "hello@example.com", // TODO: real address
+    email: "hello@gustav.tourground.com",
     phone: "+00 000 000 000", // TODO: real number
     whatsapp: "+00 000 000 000",
     hours: "Mon–Fri, 09.00–17.00 CET",

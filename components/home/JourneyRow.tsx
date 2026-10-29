@@ -4,9 +4,10 @@ import { useRef } from "react";
 import { JourneyCard } from "@/components/journeys/JourneyCard";
 import { ArrowLink } from "@/components/ui/Links";
 import { journeys } from "@/data/journeys";
+import type { ImageRef } from "@/types/content";
 
 /** Horizontally scrolling journey cards with mono details. */
-export function JourneyRow() {
+export function JourneyRow({ images }: { images: Record<string, ImageRef | undefined> }) {
   const track = useRef<HTMLUListElement>(null);
   const scroll = (direction: 1 | -1) => {
     const el = track.current;
@@ -43,7 +44,7 @@ export function JourneyRow() {
       >
         {journeys.map((j) => (
           <li key={j.slug} className="w-[80vw] shrink-0 snap-start sm:w-[46vw] lg:w-[30vw] xl:w-[26vw]">
-            <JourneyCard journey={j} />
+            <JourneyCard journey={j} image={images[j.slug]} />
           </li>
         ))}
       </ul>
