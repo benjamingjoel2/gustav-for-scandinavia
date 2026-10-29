@@ -32,11 +32,6 @@ export const viewport: Viewport = { themeColor: "#f3efe6" };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${albert.variable} ${newsreader.variable} ${dmMono.variable}`}>
-      <head>
-        {/* Photographs come from the Unsplash CDN: open the connection before the first image is requested. */}
-        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
-      </head>
       <body>
         <JsonLd
           data={{

@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:a11y": "playwright test",
-    "build:map": "tsx scripts/build-map.ts"
+    "build:map": "tsx scripts/build-map.ts",
+    "build:photos": "tsx scripts/build-photos.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

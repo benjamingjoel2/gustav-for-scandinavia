@@ -59,7 +59,7 @@ export default function ExperiencesPage() {
         {experiences.map((e, i) => (
           <article key={e.id} id={e.id} aria-labelledby={`${e.id}-title`} className="gutter grid-12 scroll-mt-24 items-start gap-y-8 border-t border-ink/15 pt-12">
             <div className={`relative col-span-12 aspect-[4/3] overflow-hidden bg-birch-200 md:col-span-7 ${i % 2 ? "md:order-2 md:col-start-6" : ""}`}>
-              <Photo image={experienceImage(e.id)} ratio="4:3" sizes="(min-width: 768px) 58vw, 100vw" eager={i === 0} />
+              <Photo image={experienceImage(e.id)} sizes="(min-width: 768px) 58vw, 100vw" eager={i === 0} />
             </div>
             <div className={`col-span-12 md:col-span-4 ${i % 2 ? "md:order-1 md:col-start-1" : "md:col-start-9"}`}>
               <p className="eyebrow text-stone">{e.seasonNote}</p>

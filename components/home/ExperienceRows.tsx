@@ -52,7 +52,7 @@ export function ExperienceRows() {
         {rows.map((row, i) => (
           <article key={row.id} className="gutter grid-12 items-center gap-y-8">
             <div className={`relative col-span-12 aspect-[4/3] overflow-hidden md:col-span-7 ${i % 2 ? "md:order-2 md:col-start-6" : ""}`}>
-              <Photo image={experienceImage(row.id)} ratio="4:3" sizes="(min-width: 768px) 58vw, 100vw" />
+              <Photo image={experienceImage(row.id)} sizes="(min-width: 768px) 58vw, 100vw" />
             </div>
             <div className={`col-span-12 md:col-span-4 ${i % 2 ? "md:order-1 md:col-start-1" : "md:col-start-9"}`}>
               <p className="eyebrow text-stone">{row.eyebrow}</p>

@@ -12,14 +12,14 @@ export function Gallery({ images, className = "" }: { images: ImageRef[]; classN
     <div className={`grid-12 gap-y-6 ${className}`}>
       <figure className="col-span-12 md:col-span-7">
         <div className="relative aspect-[3/2] overflow-hidden bg-birch-200">
-          <Photo image={a} ratio="3:2" sizes="(min-width: 768px) 58vw, 100vw" />
+          <Photo image={a} sizes="(min-width: 768px) 58vw, 100vw" />
         </div>
         <figcaption className="meta mt-2 text-stone">{a.credit}</figcaption>
       </figure>
       {b && (
         <figure className="col-span-8 col-start-5 md:col-span-4 md:col-start-9 md:mt-24">
           <div className="relative aspect-[4/5] overflow-hidden bg-birch-200">
-            <Photo image={b} ratio="4:5" sizes="(min-width: 768px) 33vw, 66vw" />
+            <Photo image={b} sizes="(min-width: 768px) 33vw, 66vw" />
           </div>
           <figcaption className="meta mt-2 text-stone">{b.credit}</figcaption>
         </figure>
@@ -27,7 +27,7 @@ export function Gallery({ images, className = "" }: { images: ImageRef[]; classN
       {c && (
         <figure className={`col-span-12 md:col-span-5 md:col-start-2 ${d ? "" : "md:-mt-12"}`}>
           <div className="relative aspect-[4/3] overflow-hidden bg-birch-200">
-            <Photo image={c} ratio="4:3" sizes="(min-width: 768px) 42vw, 100vw" />
+            <Photo image={c} sizes="(min-width: 768px) 42vw, 100vw" />
           </div>
           <figcaption className="meta mt-2 text-stone">{c.credit}</figcaption>
         </figure>
@@ -35,7 +35,7 @@ export function Gallery({ images, className = "" }: { images: ImageRef[]; classN
       {d && (
         <figure className="col-span-10 md:col-span-4 md:col-start-8 md:mt-16">
           <div className="relative aspect-[1/1] overflow-hidden bg-birch-200">
-            <Photo image={d} ratio="1:1" sizes="(min-width: 768px) 33vw, 83vw" />
+            <Photo image={d} sizes="(min-width: 768px) 33vw, 83vw" />
           </div>
           <figcaption className="meta mt-2 text-stone">{d.credit}</figcaption>
         </figure>

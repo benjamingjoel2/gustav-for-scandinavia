@@ -92,7 +92,7 @@ export default async function DestinationPage({ params }: Props) {
       />
       <header className="relative isolate flex min-h-[80svh] flex-col justify-end overflow-hidden bg-polar text-birch-50">
         <div className="absolute inset-0 -z-10">
-          <Photo image={image} sizes="100vw" eager quality={55} />
+          <Photo image={image} sizes="100vw" eager />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(16_27_33/0.4)_0%,rgb(16_27_33/0)_40%,rgb(16_27_33/0.7)_100%)]" />
         </div>
         <div className="gutter pb-10 pt-32">

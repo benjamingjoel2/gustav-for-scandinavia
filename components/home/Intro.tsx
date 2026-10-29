@@ -20,7 +20,7 @@ export function Intro() {
       {tall && (
         <figure className="col-span-8 md:col-span-4 md:mt-8">
           <div className="relative aspect-[4/5] overflow-hidden bg-birch-200">
-            <Photo image={tall} ratio="4:5" sizes="(min-width: 768px) 33vw, 66vw" />
+            <Photo image={tall} sizes="(min-width: 768px) 33vw, 66vw" />
           </div>
           <figcaption className="meta mt-2 text-stone">{tall.credit}</figcaption>
         </figure>
@@ -40,7 +40,7 @@ export function Intro() {
         {wide && (
           <figure className="mt-12">
             <div className="relative aspect-[3/2] overflow-hidden bg-birch-200">
-              <Photo image={wide} ratio="3:2" sizes="(min-width: 1024px) 42vw, (min-width: 768px) 50vw, 100vw" />
+              <Photo image={wide} sizes="(min-width: 1024px) 42vw, (min-width: 768px) 50vw, 100vw" />
             </div>
             <figcaption className="meta mt-2 text-stone">{wide.credit}</figcaption>
           </figure>

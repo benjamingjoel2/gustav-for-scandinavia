@@ -151,7 +151,7 @@ export function LightCalendar({ year, initialDay, momentImages }: { year: number
             <li key={m.id} className="border-t border-birch-50/25 pt-5">
               {momentImages[m.id] && (
                 <div className="relative mb-5 aspect-[4/3] overflow-hidden bg-black/20">
-                  <Photo image={momentImages[m.id]} ratio="4:3" sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 100vw" />
+                  <Photo image={momentImages[m.id]} sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 100vw" />
                 </div>
               )}
               <p className="meta text-oak">{m.where}</p>

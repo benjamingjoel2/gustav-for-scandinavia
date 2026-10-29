@@ -254,7 +254,7 @@ export function RouteBuilder({ routeImages }: { routeImages: Record<string, Imag
             <li key={r.id}>
               {routeImages[r.id] && (
                 <div className="relative mb-4 aspect-[3/2] overflow-hidden bg-birch-200">
-                  <Photo image={routeImages[r.id]} ratio="3:2" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw" />
+                  <Photo image={routeImages[r.id]} sizes="(min-width: 1024px) 30vw, (min-width: 640px) 46vw, 100vw" />
                 </div>
               )}
               <h3 className="font-sans text-lg">{r.name}</h3>
