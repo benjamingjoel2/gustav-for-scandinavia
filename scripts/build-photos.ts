@@ -6,9 +6,9 @@
  * Existing files are kept, so re-running only processes new photos.
  * Run: npm run build:photos
  */
-import { existsSync, mkdirSync } from "node:fs";
+import { existsSync, mkdirSync, renameSync } from "node:fs";
 import path from "node:path";
-import sharp from "sharp";
+import sharp, { type Sharp } from "sharp";
 import { collectPhotoIds } from "../lib/photo-ids";
 import { PHOTO_FALLBACK_WIDTH, PHOTO_WIDTHS } from "../lib/photo-widths";
 
@@ -17,22 +17,38 @@ const OUT = path.join(ROOT, "public/photos");
 const SOURCE_WIDTH = 2400;
 const CONCURRENCY = 4;
 
-async function processPhoto(id: string) {
+async function download(id: string, attempt = 1): Promise<Buffer> {
   const res = await fetch(`https://images.unsplash.com/photo-${id}?w=${SOURCE_WIDTH}&q=85&fm=jpg`);
-  if (!res.ok) throw new Error(`${id}: HTTP ${res.status}`);
-  const source = sharp(Buffer.from(await res.arrayBuffer())).rotate();
+  if (res.ok) return Buffer.from(await res.arrayBuffer());
+  if (attempt >= 5) throw new Error(`${id}: HTTP ${res.status}`);
+  await new Promise((resolve) => setTimeout(resolve, 2000 * attempt));
+  return download(id, attempt + 1);
+}
+
+/** Write through a temporary file, so an interrupted run never leaves a half-written photo behind. */
+async function write(file: string, image: Sharp) {
+  if (existsSync(file)) return;
+  await image.toFile(`${file}.tmp`);
+  renameSync(`${file}.tmp`, file);
+}
+
+const outputs = (id: string) => [
+  ...PHOTO_WIDTHS.map((w) => path.join(OUT, `${id}-${w}.avif`)),
+  path.join(OUT, `${id}-${PHOTO_FALLBACK_WIDTH}.jpg`),
+  path.join(OUT, `${id}-blur.webp`),
+];
+
+async function processPhoto(id: string) {
+  if (outputs(id).every((file) => existsSync(file))) return;
+  const source = sharp(await download(id)).rotate();
   const { width = SOURCE_WIDTH } = await source.metadata();
   if (width < PHOTO_WIDTHS[PHOTO_WIDTHS.length - 1]) console.warn(`${id}: only ${width}px wide`);
 
   for (const w of PHOTO_WIDTHS) {
-    const file = path.join(OUT, `${id}-${w}.avif`);
-    if (!existsSync(file)) await source.clone().resize({ width: Math.min(w, width) }).avif({ quality: 50, effort: 4 }).toFile(file);
+    await write(path.join(OUT, `${id}-${w}.avif`), source.clone().resize({ width: Math.min(w, width) }).avif({ quality: 50, effort: 4 }));
   }
-  const fallback = path.join(OUT, `${id}-${PHOTO_FALLBACK_WIDTH}.jpg`);
-  if (!existsSync(fallback)) await source.clone().resize({ width: PHOTO_FALLBACK_WIDTH }).jpeg({ quality: 70, mozjpeg: true, progressive: true }).toFile(fallback);
-
-  const blur = path.join(OUT, `${id}-blur.webp`);
-  if (!existsSync(blur)) await source.clone().resize({ width: 24 }).webp({ quality: 50 }).toFile(blur);
+  await write(path.join(OUT, `${id}-${PHOTO_FALLBACK_WIDTH}.jpg`), source.clone().resize({ width: PHOTO_FALLBACK_WIDTH }).jpeg({ quality: 70, mozjpeg: true, progressive: true }));
+  await write(path.join(OUT, `${id}-blur.webp`), source.clone().resize({ width: 24 }).webp({ quality: 50 }));
 }
 
 async function main() {
