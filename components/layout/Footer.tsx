@@ -42,20 +42,18 @@ export function Footer() {
           ))}
         </nav>
 
-        <div className="col-span-12 grid gap-8 border-t border-birch-50/20 pt-8 md:grid-cols-3">
+        <div className="col-span-12 grid gap-8 border-t border-birch-50/20 pt-8 md:grid-cols-2">
           <div className="meta space-y-1 text-birch-50/80">
-            <p>{site.company.legalName}</p>
-            <p>{site.company.registration}</p>
-            <p>{site.company.address}</p>
+            {site.address.lines.map((line) => (
+              <p key={line}>{line}</p>
+            ))}
           </div>
-          <p className="meta normal-case leading-relaxed tracking-normal text-birch-50/80">{site.company.packageProtection}</p>
           <div className="meta space-y-1 text-birch-50/80 md:text-right">
             <p>
               <a href={`mailto:${site.contact.email}`} className="hover:underline">
                 {site.contact.email}
               </a>
             </p>
-            <p>{site.contact.phone}</p>
             <p>{site.contact.hours}</p>
           </div>
         </div>

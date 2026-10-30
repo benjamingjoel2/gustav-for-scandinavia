@@ -14,14 +14,12 @@ export function Gallery({ images, className = "" }: { images: ImageRef[]; classN
         <div className="relative aspect-[3/2] overflow-hidden bg-birch-200">
           <Photo image={a} sizes="(min-width: 768px) 58vw, 100vw" />
         </div>
-        <figcaption className="meta mt-2 text-stone">{a.credit}</figcaption>
       </figure>
       {b && (
         <figure className="col-span-8 col-start-5 md:col-span-4 md:col-start-9 md:mt-24">
           <div className="relative aspect-[4/5] overflow-hidden bg-birch-200">
             <Photo image={b} sizes="(min-width: 768px) 33vw, 66vw" />
           </div>
-          <figcaption className="meta mt-2 text-stone">{b.credit}</figcaption>
         </figure>
       )}
       {c && (
@@ -29,7 +27,6 @@ export function Gallery({ images, className = "" }: { images: ImageRef[]; classN
           <div className="relative aspect-[4/3] overflow-hidden bg-birch-200">
             <Photo image={c} sizes="(min-width: 768px) 42vw, 100vw" />
           </div>
-          <figcaption className="meta mt-2 text-stone">{c.credit}</figcaption>
         </figure>
       )}
       {d && (
@@ -37,7 +34,6 @@ export function Gallery({ images, className = "" }: { images: ImageRef[]; classN
           <div className="relative aspect-[1/1] overflow-hidden bg-birch-200">
             <Photo image={d} sizes="(min-width: 768px) 33vw, 83vw" />
           </div>
-          <figcaption className="meta mt-2 text-stone">{d.credit}</figcaption>
         </figure>
       )}
     </div>

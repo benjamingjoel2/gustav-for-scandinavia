@@ -106,7 +106,6 @@ export default async function DestinationPage({ params }: Props) {
           <p className="meta mt-6">
             {formatCoords(place.lat, place.lng)} · Best {formatMonths(destination.bestMonths)}
           </p>
-          {image && <p className="meta mt-2 text-[0.625rem] text-birch-50/80">Photo: {image.credit}</p>}
         </div>
       </header>
 

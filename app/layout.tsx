@@ -42,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             description: site.description,
             url: site.url,
             email: site.contact.email,
+            address: { "@type": "PostalAddress", ...site.address.postal },
             areaServed: ["Norway", "Sweden", "Denmark", "Finland"],
           }}
         />

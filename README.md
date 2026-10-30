@@ -18,7 +18,7 @@ npm run build
 
 | What | Where |
 |---|---|
-| Brand settings, nav, company placeholders, dark-season threshold | `config/site.ts` |
+| Brand settings, nav, business address, dark-season threshold | `config/site.ts` |
 | Feature toggles (ETIAS "coming soon" → live) | `config/features.ts` |
 | Currency rates (editable, approximate) | `config/currency.ts` |
 | Places and coordinates | `data/places.ts` |
@@ -26,12 +26,13 @@ npm run build
 | Journeys and day-by-day itineraries | `data/journeys.ts`, `data/itineraries.ts` |
 | Route legs and named slow routes (editable time estimates) | `data/routes.ts` |
 | Emission factors for the route builder | `data/emissions.ts` |
-| Experiences, Black Book, stays, testimonials, FAQ, light moments | `data/*.ts` |
-| Photography (Unsplash placeholders, credited) | `data/media.ts`, `data/media-sourced.ts` |
+| Experiences, Black Book, stays, FAQ, light moments | `data/*.ts` |
+| Privacy Policy, Booking Terms, Cookie Policy (`/privacy`, `/terms`, `/cookies`) | `data/legal.ts`, `lib/legal.ts` |
+| Photography (Unsplash placeholders; credits kept in the data, not shown) | `data/media.ts`, `data/media-sourced.ts` |
 | Journal posts and long-form pages (MDX) | `content/journal/`, `content/pages/` |
 | Design tokens | `app/globals.css` (`@theme`) |
 
-Everything marked `placeholder: true` (Black Book entries, stays, testimonials) and every `[Placeholder]` in the legal text must be replaced or verified before launch.
+Everything marked `placeholder: true` (Black Book entries, stays) and the `[Placeholder]` Sámi partners on `/sapmi` must be replaced or verified before launch (see `IMAGES-NEEDED.md`). Have a lawyer review `/privacy`, `/terms` and `/cookies`, and confirm the business address (MESH Nationaltheatret, Tordenskiolds gate 2, 0160 Oslo) and `gustav@tourground.com`. By the owner's rule the site shows no phone, WhatsApp, social links, licence or guarantee numbers, team bios or testimonials.
 
 ## Notes
 
