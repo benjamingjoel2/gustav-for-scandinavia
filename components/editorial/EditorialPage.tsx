@@ -32,7 +32,6 @@ export function EditorialPage({ eyebrow, title, lede, meta, children, aside, her
           <div className="relative aspect-[16/10] max-h-[78svh] w-full overflow-hidden bg-birch-200 md:aspect-[21/9]">
             <Photo image={hero} sizes="100vw" eager />
           </div>
-          <figcaption className="gutter meta mt-2 text-stone">{hero.credit}</figcaption>
         </figure>
       ) : (
         <Horizon />

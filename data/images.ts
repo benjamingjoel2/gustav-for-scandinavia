@@ -6,7 +6,8 @@ import { destinationImages, experienceImages, journeyImages, type SourcedImage }
 
 function toRef(image: SourcedImage | undefined, focus?: string): ImageRef | undefined {
   if (!image) return undefined;
-  return { src: image.src, alt: image.alt, credit: image.credit, creditUrl: image.creditUrl, placeholder: true, focus };
+  // Credits stay in the media files for the record; they are not shown (owner's rule), so not sent to the page.
+  return { src: image.src, alt: image.alt, placeholder: true, focus };
 }
 
 const refs = (images: SourcedImage[] | undefined) => (images ?? []).map((i) => toRef(i)!).filter(Boolean);

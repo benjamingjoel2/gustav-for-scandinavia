@@ -16,7 +16,7 @@ export interface ImageRef {
   src: string;
   alt: string;
   /** "Name / Unsplash" */
-  credit: string;
+  credit?: string;
   creditUrl?: string;
   /** Stock placeholder, to be replaced with licensed photography. */
   placeholder: boolean;
@@ -56,14 +56,6 @@ export interface JourneySummary {
   stops: string[];
 }
 
-export interface Testimonial {
-  id: string;
-  quote: string;
-  /** Anonymous: "Travellers from Melbourne" */
-  from: string;
-  journey: string;
-  placeholder: true;
-}
 
 export type Mode = "train" | "night-train" | "ferry" | "coastal-ship" | "car" | "bus" | "flight";
 

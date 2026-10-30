@@ -76,7 +76,6 @@ export function BlackBook({ themeImages }: { themeImages: Record<Theme, ImageRef
               <div className={`relative overflow-hidden bg-birch-200 ${i === 0 ? "aspect-[3/2]" : "aspect-[4/5]"}`}>
                 <Photo image={img} sizes="(min-width: 768px) 50vw, 100vw" />
               </div>
-              <figcaption className="meta mt-2 text-stone">{img.credit}</figcaption>
             </figure>
           ))}
         </div>

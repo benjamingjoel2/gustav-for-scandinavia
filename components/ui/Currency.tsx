@@ -38,8 +38,8 @@ export function useCurrency(): [Currency, (c: Currency) => void] {
   return [currency, set];
 }
 
-/** "from €5,400" in the visitor's chosen currency. */
-export function Price({ eur, prefix = "from", className = "" }: { eur: number; prefix?: string; className?: string }) {
+/** "From €5,400" in the visitor's chosen currency. */
+export function Price({ eur, prefix = "From", className = "" }: { eur: number; prefix?: string; className?: string }) {
   const [currency] = useCurrency();
   return (
     <span className={className}>

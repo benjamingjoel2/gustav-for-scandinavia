@@ -179,11 +179,6 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
               <span className="sr-only"> rotating places</span>
             </button>
           )}
-          {image && (
-            <a href={image.creditUrl} className="meta w-full text-[0.625rem] text-birch-50/80 hover:text-birch-50 sm:ml-4 sm:w-auto" rel="noopener">
-              Photo: {image.credit}
-            </a>
-          )}
         </div>
         <p className="sr-only" aria-live="polite">
           {announcement}

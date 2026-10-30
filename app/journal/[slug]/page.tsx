@@ -68,7 +68,6 @@ export default async function JournalPost({ params }: Props) {
                 <div className="relative aspect-[4/5] w-full overflow-hidden">
                   <Photo image={image} sizes="(min-width: 768px) 25vw, 100vw" />
                 </div>
-                <figcaption className="meta mt-2 text-stone">{image.credit}</figcaption>
               </figure>
             )}
             <ArrowLink href="/enquire">Plan a journey</ArrowLink>

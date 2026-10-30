@@ -4,7 +4,7 @@ import { destinations } from "@/data/destinations";
 import { journalSlugs } from "@/data/journal";
 import { journeys } from "@/data/journeys";
 
-const staticPaths = ["", "/journeys", "/destinations", "/experiences", "/light-calendar", "/route-builder", "/black-book", "/sapmi", "/travelling-lighter", "/about", "/journal", "/enquire", "/faq", "/legal"];
+const staticPaths = ["", "/journeys", "/destinations", "/experiences", "/light-calendar", "/route-builder", "/black-book", "/sapmi", "/travelling-lighter", "/about", "/journal", "/enquire", "/faq", "/privacy", "/terms", "/cookies"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const url = (path: string) => `${site.url}${path}`;

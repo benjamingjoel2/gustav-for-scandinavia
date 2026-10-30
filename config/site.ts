@@ -8,17 +8,13 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL ? "https://gustav.tourground.com" : "http://localhost:3000"),
   locale: "en_GB",
   contact: {
-    email: "hello@gustav.tourground.com",
-    phone: "+00 000 000 000", // TODO: real number
-    whatsapp: "+00 000 000 000",
+    email: "gustav@tourground.com",
     hours: "Mon–Fri, 09.00–17.00 CET",
   },
-  company: {
-    legalName: "[Company name] AS", // placeholder
-    registration: "Org. no. [000 000 000]", // placeholder
-    address: "[Street], [Postcode] [City], Norway", // placeholder
-    packageProtection:
-      "Package travel protected under the EU Package Travel Directive (2015/2302). Guarantee provider: [placeholder]. Certificate no. [placeholder].",
+  /** Business address: MESH Nationaltheatret, Oslo (premium coworking, owner-approved arrangement). No phone by design. */
+  address: {
+    lines: ["MESH Nationaltheatret", "Tordenskiolds gate 2", "0160 Oslo", "Norway"],
+    postal: { streetAddress: "Tordenskiolds gate 2", postalCode: "0160", addressLocality: "Oslo", addressCountry: "NO" },
   },
   /** Below this many minutes of daylight today (or while the sun is down), the homepage hero uses the dark-season photographs. */
   darkSeasonThresholdMinutes: 8 * 60,
@@ -75,10 +71,9 @@ export const menuGroups: { label: string; items: NavItem[] }[] = [
 ];
 
 export const legalNav: NavItem[] = [
-  { label: "Terms & conditions", href: "/legal#terms-and-conditions" },
-  { label: "Privacy", href: "/legal#privacy" },
-  { label: "Cookies", href: "/legal#cookies" },
-  { label: "Package travel", href: "/legal#package-travel-protection" },
+  { label: "Booking terms", href: "/terms" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Cookies", href: "/cookies" },
 ];
 
 /** Routes whose first section is a full-bleed photograph; the header sits on top of it. */

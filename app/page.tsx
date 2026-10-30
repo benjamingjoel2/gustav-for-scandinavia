@@ -4,7 +4,6 @@ import { FlightFreeBand } from "@/components/home/FlightFreeBand";
 import { Intro } from "@/components/home/Intro";
 import { JourneyRow } from "@/components/home/JourneyRow";
 import { LightToday } from "@/components/home/LightToday";
-import { Testimonials } from "@/components/home/Testimonials";
 import { MotionProvider } from "@/components/layout/MotionProvider";
 import { LiveLight } from "@/components/light/LiveLight";
 import { destinations } from "@/data/destinations";
@@ -29,7 +28,6 @@ export default function Home() {
       <LightToday now={now} />
       <ExperienceRows />
       <FlightFreeBand />
-      <Testimonials />
     </MotionProvider>
   );
 }

@@ -22,7 +22,6 @@ export function Intro() {
           <div className="relative aspect-[4/5] overflow-hidden bg-birch-200">
             <Photo image={tall} sizes="(min-width: 768px) 33vw, 66vw" />
           </div>
-          <figcaption className="meta mt-2 text-stone">{tall.credit}</figcaption>
         </figure>
       )}
 
@@ -42,7 +41,6 @@ export function Intro() {
             <div className="relative aspect-[3/2] overflow-hidden bg-birch-200">
               <Photo image={wide} sizes="(min-width: 1024px) 42vw, (min-width: 768px) 50vw, 100vw" />
             </div>
-            <figcaption className="meta mt-2 text-stone">{wide.credit}</figcaption>
           </figure>
         )}
       </div>

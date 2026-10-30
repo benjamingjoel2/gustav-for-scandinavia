@@ -95,13 +95,7 @@ export const faq: FaqItem[] = [
     id: "deposits-cancellations",
     group: "Booking",
     q: "How do deposits and cancellations work?",
-    a: "[Placeholder] Our final terms are being prepared.\n\nIn simple terms: a deposit confirms your booking, and the balance is due a set time before you travel. If you cancel, charges increase as departure gets closer, partly because some trains, ferries and hotels have their own conditions. The exact amounts and dates will be set out in our terms before you book.\n\nWe strongly recommend travel insurance that covers cancellation from the day you book.",
-  },
-  {
-    id: "package-protection",
-    group: "Booking",
-    q: "Is my booking protected?",
-    a: "Journeys that combine transport and accommodation are generally package travel under the EU Package Travel Directive, which gives you protection if something goes wrong, including if the organiser becomes insolvent.\n\n[Placeholder] Details of our protection arrangements will be published on our legal page.",
+    a: "A deposit confirms your booking, and the balance is due a set time before you travel. If you cancel, charges increase as departure gets closer, partly because some trains, ferries and hotels have their own conditions. The exact amounts and dates are set out in your proposal before you book, and our booking terms explain the rest.\n\nWe strongly recommend travel insurance that covers cancellation from the day you book.",
   },
   {
     id: "private-or-group",
