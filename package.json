@@ -14,7 +14,9 @@
     "test": "vitest run",
     "test:a11y": "playwright test",
     "build:map": "tsx scripts/build-map.ts",
-    "build:photos": "tsx scripts/build-photos.ts"
+    "build:photos": "tsx scripts/build-photos.ts",
+    "cf-build": "opennextjs-cloudflare build && cp cloudflare/_headers .open-next/assets/_headers",
+    "cf-pages": "node scripts/cf-pages.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
+    "@opennextjs/cloudflare": "^1.20.15",
     "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@types/d3-geo": "^3.1.1",
@@ -46,6 +49,7 @@
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5",
-    "world-atlas": "^2.0.2"
+    "world-atlas": "^2.0.2",
+    "wrangler": "^4.156.0"
   }
 }

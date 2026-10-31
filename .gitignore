@@ -18,3 +18,9 @@ playwright-report
 /i18n/gen/
 /i18n/strings.json
 /i18n/missing.json
+
+# Cloudflare (OpenNext) build output
+/.open-next
+/.wrangler
+/dist-pages
+/.cf-bundle
