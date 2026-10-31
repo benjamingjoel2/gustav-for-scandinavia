@@ -1,0 +1,9 @@
+{
+  "locales": ["en", "fr", "de", "es"],
+  "defaultLocale": "en",
+  "routeSrc": "app/(en)",
+  "shared": ["components", "data", "config", "lib", "content", "types"],
+  "genDir": "i18n/gen",
+  "excludeRoutes": ["design-system"],
+  "overrideDir": "i18n/content"
+}

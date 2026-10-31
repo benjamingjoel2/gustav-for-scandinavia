@@ -41,3 +41,11 @@ Everything marked `placeholder: true` (Black Book entries, stays) and the `[Plac
 - **Photos** are served from `public/photos`, not from Unsplash. After adding or changing a photo in `data/`, run `npm run build:photos` and commit the new files (`lib/photos.test.ts` fails until you do).
 - **Domain**: the site lives at https://gustav.tourground.com (DNS for tourground.com is on Vercel). `NEXT_PUBLIC_SITE_URL` overrides it.
 - **Brand voice** is checked by `lib/voice.test.ts` (no "magical", "breathtaking", "hygge"…).
+
+## Languages (EN, FR, DE, ES)
+
+English is the source and lives in `app/(en)`. `scripts/i18n.mjs` (run automatically before `dev` and `build`) writes a translated copy of the route tree to `app/fr`, `app/de`, `app/es` and of the shared code to `i18n/gen/<locale>/`, replacing every English string with its translation from `i18n/<locale>.json` (keyed by the English text) and prefixing internal links. Long-form MDX is translated by hand in `i18n/content/<locale>/content/...`. No translation library ships to the browser; every locale is pre-rendered.
+
+- Add or change English copy, then run `node scripts/i18n.mjs --missing` and add the listed strings to the three dictionaries (the build fails on a missing string).
+- The header and menu carry an EN · FR · DE · ES selector that links to the same page in each language. Canonical and hreflang come from `alternatesFor()` in `lib/i18n-paths.ts`; the sitemap lists every page in every language.
+- `/design-system` is internal and stays English-only.

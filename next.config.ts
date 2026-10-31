@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["ts", "tsx", "mdx"],
+  // One root layout per language (app/(en), app/fr, app/de, app/es), so unmatched URLs need a global 404.
+  experimental: { globalNotFound: true },
   // The single /legal page became /privacy, /terms and /cookies.
   async redirects() {
     return [{ source: "/legal", destination: "/terms", permanent: true }];

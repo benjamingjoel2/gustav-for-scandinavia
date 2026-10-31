@@ -1,7 +1,8 @@
+import { intlLocale } from "@/lib/i18n-paths";
 import type { LegalPage } from "@/data/legal";
 
 const fmt = (d: string) =>
-  new Date(`${d}T12:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+  new Date(`${d}T12:00:00Z`).toLocaleDateString(intlLocale, { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
 /** Body of the Privacy, Booking Terms and Cookie Policy pages. Text lives in data/legal.ts (static, trusted HTML). */
 export function LegalBody({ page }: { page: LegalPage }) {

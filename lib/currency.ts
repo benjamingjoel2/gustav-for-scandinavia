@@ -1,4 +1,6 @@
 import { currencies, type Currency } from "@/config/currency";
+import { intlLocale } from "@/lib/i18n-paths";
+import { locale } from "@/lib/locale";
 
 export function convertFromEUR(amountEUR: number, currency: Currency): number {
   const { rate, round } = currencies[currency];
@@ -6,7 +8,7 @@ export function convertFromEUR(amountEUR: number, currency: Currency): number {
 }
 
 export function formatPrice(amountEUR: number, currency: Currency): string {
-  return new Intl.NumberFormat(currencies[currency].locale, {
+  return new Intl.NumberFormat(locale === "en" ? currencies[currency].locale : intlLocale, {
     style: "currency",
     currency,
     maximumFractionDigits: 0,
