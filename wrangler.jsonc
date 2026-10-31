@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // Cloudflare config for the OpenNext build (`npm run cf-build` / `npm run cf-pages`).
+  // Vercel ignores this file.
+  "name": "gustav-for-scandinavia",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-23",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  }
+}
