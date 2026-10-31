@@ -14,7 +14,6 @@ export const comfortLevels = [
 
 export const contactMethods = [
   { value: "email", label: "Email" },
-  { value: "whatsapp", label: "WhatsApp" },
   { value: "phone", label: "Phone" },
 ] as const;
 
@@ -79,7 +78,7 @@ export function validateEnquiry(e: Enquiry): EnquiryErrors {
   const errors: EnquiryErrors = {};
   if (!e.name.trim()) errors.name = "Please tell us your name.";
   if (!EMAIL.test(e.email.trim())) errors.email = "Please check your email address.";
-  if ((e.contact === "phone" || e.contact === "whatsapp") && e.phone.replace(/\D/g, "").length < 6)
+  if (e.contact === "phone" && e.phone.replace(/\D/g, "").length < 6)
     errors.phone = "Please add a number so we can reach you that way.";
   const days = Number(e.days);
   if (e.days && (!Number.isInteger(days) || days < 2 || days > 60)) errors.days = "Between 2 and 60 days, please.";

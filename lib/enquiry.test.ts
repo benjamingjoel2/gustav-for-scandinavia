@@ -10,9 +10,9 @@ describe("validateEnquiry", () => {
   it("needs a name and a valid email", () => {
     expect(Object.keys(validateEnquiry(emptyEnquiry))).toEqual(expect.arrayContaining(["name", "email"]));
   });
-  it("needs a phone number when asked to call or WhatsApp", () => {
-    expect(validateEnquiry({ ...valid, contact: "whatsapp" }).phone).toBeTruthy();
-    expect(validateEnquiry({ ...valid, contact: "whatsapp", phone: "+47 900 00 000" })).toEqual({});
+  it("needs a phone number when asked to call", () => {
+    expect(validateEnquiry({ ...valid, contact: "phone" }).phone).toBeTruthy();
+    expect(validateEnquiry({ ...valid, contact: "phone", phone: "+47 900 00 000" })).toEqual({});
   });
   it("checks the number of days", () => {
     expect(validateEnquiry({ ...valid, days: "1" }).days).toBeTruthy();

@@ -7,7 +7,7 @@ export const journalSlugs = ["midnight-sun-or-northern-lights", "oslo-to-bergen-
 export type JournalSlug = (typeof journalSlugs)[number];
 
 export async function loadPost(slug: JournalSlug) {
-  const mod = await import(`@/content/journal/${slug}.mdx`);
+  const mod = await import(`../content/journal/${slug}.mdx`);
   return { Content: mod.default, meta: mod.meta as JournalMeta };
 }
 

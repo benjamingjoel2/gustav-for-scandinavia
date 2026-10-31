@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Logo } from "@/components/brand/Logo";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { menuGroups, overlayHeaderRoutes, primaryNav, site } from "@/config/site";
 
 export function Header() {
@@ -85,6 +86,7 @@ export function Header() {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-3 lg:ml-0">
+            <LanguageSwitcher className="hidden sm:flex" />
             <button
               ref={menuButton}
               type="button"
@@ -141,6 +143,9 @@ export function Header() {
                 </div>
               ))}
             </nav>
+            <div className="gutter pb-8">
+              <LanguageSwitcher />
+            </div>
             <div className="gutter pb-12">
               <p className="lede italic text-birch-50/80">{site.promise}</p>
             </div>

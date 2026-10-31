@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "i18n": "node scripts/i18n.mjs",
+    "predev": "node scripts/i18n.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/i18n.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",

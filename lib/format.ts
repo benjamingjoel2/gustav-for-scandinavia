@@ -1,3 +1,4 @@
+import { intlLocale } from "@/lib/i18n-paths";
 /** "69.65°N 18.96°E" */
 export function formatCoords(lat: number, lng: number): string {
   const ns = lat >= 0 ? "N" : "S";
@@ -19,7 +20,7 @@ const MONTHS_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "S
 export function monthName(month: number, style: "short" | "long" = "short"): string {
   return style === "short"
     ? MONTHS_SHORT[month - 1]
-    : new Intl.DateTimeFormat("en-GB", { month: "long", timeZone: "UTC" }).format(new Date(Date.UTC(2026, month - 1, 1)));
+    : new Intl.DateTimeFormat(intlLocale, { month: "long", timeZone: "UTC" }).format(new Date(Date.UTC(2026, month - 1, 1)));
 }
 
 /** [11, 12, 1, 2, 3] → "Nov–Mar"; [2, 3, 6, 7, 8] → "Feb–Mar, Jun–Aug" */
