@@ -1,7 +1,7 @@
 import { alternatesFor, OG_LOCALES } from "@/lib/i18n-paths";
 import { locale } from "@/lib/locale";
 import type { Metadata, Viewport } from "next";
-import { Albert_Sans, DM_Mono, Newsreader } from "next/font/google";
+import { Albert_Sans, Newsreader } from "next/font/google";
 import { JsonLd } from "@/components/editorial/JsonLd";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -18,7 +18,6 @@ const newsreader = Newsreader({
   // Not preloaded: it would compete with the opening photograph. Text paints at once in a size-matched fallback.
   preload: false,
 });
-const dmMono = DM_Mono({ subsets: ["latin"], weight: "400", variable: "--font-dm-mono", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -33,7 +32,7 @@ export const viewport: Viewport = { themeColor: "#f3efe6" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={locale} className={`${albert.variable} ${newsreader.variable} ${dmMono.variable}`}>
+    <html lang={locale} className={`${albert.variable} ${newsreader.variable}`}>
       <body>
         <JsonLd
           data={{

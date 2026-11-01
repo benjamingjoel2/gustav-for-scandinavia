@@ -12,8 +12,7 @@ export function Intro() {
   const [tall, wide] = editorialImageSet("home-intro");
   return (
     <section id="intro" aria-labelledby="intro-title" className="gutter grid-12 scroll-mt-20 gap-y-10 py-24 md:py-36">
-      <p className="eyebrow col-span-12 text-stone">Private journeys through Scandinavia and Finland</p>
-      <h2 id="intro-title" className="headline col-span-12 max-w-4xl md:col-span-9">
+      <h2 id="intro-title" className="col-span-12 max-w-5xl font-serif text-[clamp(2.25rem,1.5rem+3vw,4.25rem)] font-light leading-[1.05] tracking-[-0.02em] md:col-span-10">
         Scandinavia is best experienced <em>slowly</em>, by train, boat and on foot, following the light.
       </h2>
 

@@ -70,7 +70,7 @@ export function Header() {
         }`}
       >
         <div className="gutter flex h-16 items-center gap-6 md:h-[4.5rem]">
-          <Link href="/" aria-label={`${site.name}, home`} className={`text-[1.65rem] transition-opacity duration-500 ${overlay && pathname === "/" ? "opacity-0 focus-visible:opacity-100" : "opacity-100"}`}>
+          <Link href="/" aria-label={`${site.name}, home`} className="text-[1.65rem]">
             <Logo />
           </Link>
           <nav aria-label="Primary" className="hidden flex-1 justify-between px-[4vw] lg:flex">
@@ -79,7 +79,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 aria-current={pathname.startsWith(item.href) ? "page" : undefined}
-                className="text-[0.9375rem] underline-offset-[0.4em] hover:underline aria-[current=page]:underline"
+                className="text-[0.8125rem] uppercase tracking-[0.12em] underline-offset-[0.5em] hover:underline aria-[current=page]:underline"
               >
                 {item.label}
               </Link>

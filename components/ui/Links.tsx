@@ -15,6 +15,18 @@ export function PillLink({ className = "", children, ...props }: LinkProps) {
   );
 }
 
+/** Secondary action over a photograph: an outlined pill in the surrounding text colour. */
+export function GhostLink({ className = "", children, ...props }: LinkProps) {
+  return (
+    <Link
+      {...props}
+      className={`inline-flex items-center rounded-full border border-current/60 px-7 py-3.5 font-sans text-base font-medium tracking-wide backdrop-blur-sm transition-colors duration-500 ease-light hover:border-current hover:bg-current/10 ${className}`}
+    >
+      {children}
+    </Link>
+  );
+}
+
 /** Secondary action: a hairline label with a round arrow beside it. */
 export function ArrowLink({ className = "", children, ...props }: LinkProps) {
   return (
