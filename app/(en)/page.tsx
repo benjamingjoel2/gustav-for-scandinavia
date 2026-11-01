@@ -1,13 +1,12 @@
-import { CountryExplorer } from "@/components/home/CountryExplorer";
+import { CountryTiles } from "@/components/home/CountryTiles";
 import { ExperienceRows } from "@/components/home/ExperienceRows";
 import { FlightFreeBand } from "@/components/home/FlightFreeBand";
 import { Intro } from "@/components/home/Intro";
 import { JourneyRow } from "@/components/home/JourneyRow";
-import { LightToday } from "@/components/home/LightToday";
+import { LightBand } from "@/components/home/LightBand";
 import { MotionProvider } from "@/components/layout/MotionProvider";
 import { LiveLight } from "@/components/light/LiveLight";
-import { destinations } from "@/data/destinations";
-import { destinationImage, journeyImage } from "@/data/images";
+import { journeyImage } from "@/data/images";
 import { journeys } from "@/data/journeys";
 
 export const revalidate = 600;
@@ -24,8 +23,8 @@ export default function Home() {
       <LiveLight initialNow={now} />
       <Intro />
       <JourneyRow images={Object.fromEntries(journeys.map((j) => [j.slug, journeyImage(j.slug)]))} />
-      <CountryExplorer images={Object.fromEntries(destinations.map((d) => [d.slug, destinationImage(d.slug)]))} />
-      <LightToday now={now} />
+      <CountryTiles />
+      <LightBand />
       <ExperienceRows />
       <FlightFreeBand />
     </MotionProvider>

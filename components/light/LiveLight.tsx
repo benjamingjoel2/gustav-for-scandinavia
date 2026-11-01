@@ -2,14 +2,12 @@
 
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { SunPath } from "@/components/horizon/SunPath";
-import { DottedLink } from "@/components/ui/Links";
+import { GhostLink, PillLink } from "@/components/ui/Links";
 import { Photo, preloadPhoto } from "@/components/ui/Photo";
 import { site } from "@/config/site";
 import { heroImages } from "@/data/media";
 import { getPlace, liveLightPlaceIds } from "@/data/places";
-import { formatCoords, localMinuteOfDay } from "@/lib/format";
-import { HORIZON_DEPRESSION, formatDuration, formatTime, getLocalDate, getSolarElevation, getSunTimes } from "@/lib/solar";
+import { HORIZON_DEPRESSION, formatDuration, getLocalDate, getSolarElevation, getSunTimes } from "@/lib/solar";
 
 const ROTATE_MS = 8000;
 const EASE = [0.22, 0.61, 0.36, 1] as const;
@@ -23,7 +21,7 @@ function lightAt(index: number, now: number) {
   const sunDown = getSolarElevation(date, place.lat, place.lng) < -HORIZON_DEPRESSION;
   const dark = sunDown || times.daylightMinutes < site.darkSeasonThresholdMinutes;
   const image = heroImages[liveLightPlaceIds[index]]?.[dark ? "dark" : "light"];
-  return { place, day, times, dark, image, minute: localMinuteOfDay(date, place.tz) };
+  return { place, times, image };
 }
 
 function Sentence({ name, times }: { name: string; times: ReturnType<typeof getSunTimes> }) {
@@ -47,7 +45,8 @@ function Sentence({ name, times }: { name: string; times: ReturnType<typeof getS
 }
 
 /**
- * Homepage hero. Rotates through five places, showing today's real daylight, calculated from latitude and longitude.
+ * Homepage hero: full-screen photographs rotating through five places, with today's real daylight there
+ * (calculated from latitude and longitude) as a quiet caption.
  * `initialNow` comes from the server so the first client render matches; the clock then updates every minute.
  */
 export function LiveLight({ initialNow }: { initialNow: number }) {
@@ -76,7 +75,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
     return () => clearInterval(id);
   }, [rotating]);
 
-  const { place, day, times, image, minute } = lightAt(index, now);
+  const { place, times, image } = lightAt(index, now);
   useEffect(() => {
     const onLoad = () => setLoaded(true);
     if (document.readyState === "complete") {
@@ -108,7 +107,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
   return (
     <section
       aria-label="Live light"
-      className="relative isolate flex min-h-svh flex-col overflow-hidden bg-polar text-birch-50"
+      className="relative isolate flex min-h-svh flex-col justify-end overflow-hidden bg-polar text-birch-50"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       onFocusCapture={() => setHovering(true)}
@@ -121,64 +120,60 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
           </m.div>
         )}
       </AnimatePresence>
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(16_27_33/0.45)_0%,rgb(16_27_33/0.05)_35%,rgb(16_27_33/0.25)_55%,rgb(16_27_33/0.8)_100%)]" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(16_27_33/0.5)_0%,rgb(16_27_33/0.05)_30%,rgb(16_27_33/0.2)_55%,rgb(16_27_33/0.85)_100%)]" />
 
-      <div className="gutter pt-24 md:pt-28">
-        <h1 className="font-sans text-display font-light lowercase">
-          gustav<span className="sr-only"> — {site.tagline}</span>
+      <div className="gutter pb-8 pt-40 md:pb-10">
+        <p className="eyebrow text-birch-50/85">Private journeys through Scandinavia and Finland</p>
+        <h1 className="mt-6 max-w-5xl text-balance font-serif text-[clamp(3.25rem,1.5rem+7vw,9rem)] font-light leading-[0.92] tracking-[-0.03em]">
+          The North, <em>slowly.</em>
+          <span className="sr-only">
+            {" "}
+            {site.name}: {site.tagline}
+          </span>
         </h1>
-      </div>
-
-      <div className="flex-1" />
-
-      <AnimatePresence mode="wait" initial={false}>
-        <m.div key={place.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.6, ease: EASE }}>
-          <SunPath place={place} day={day} markerMinute={minute} height={110} labels={false} />
-        </m.div>
-      </AnimatePresence>
-
-      <div className="gutter grid-12 gap-y-6 pb-8 pt-6 md:pb-10">
-        <div className="col-span-12 lg:col-span-8">
-          <p className="lede text-balance" aria-live="off">
-            <Sentence name={place.name} times={times} />
-          </p>
-          <p className="meta mt-3 text-birch-50/80">
-            {formatCoords(place.lat, place.lng)}
-            {times.sunrise && times.sunset && (
-              <>
-                {" · "}Sunrise {formatTime(times.sunrise, place.tz)} · Sunset {formatTime(times.sunset, place.tz)}
-              </>
-            )}
-            {" · "}
-            {formatTime(new Date(now), place.tz)} local
-          </p>
+        <div className="mt-10 flex flex-wrap items-center gap-3">
+          <PillLink href="/journeys" className="px-7 py-3.5 text-base">
+            Explore journeys
+          </PillLink>
+          <GhostLink href="/enquire">Plan a journey</GhostLink>
         </div>
 
-        <div className="col-span-12 flex flex-wrap items-center justify-between gap-x-6 gap-y-4 lg:col-span-4 lg:flex-col lg:items-end lg:justify-end">
-          <DottedLink href="#intro">Discover Gustav ↓</DottedLink>
-        </div>
-
-        <div className="col-span-12 flex flex-wrap items-center gap-x-1 gap-y-2 border-t border-birch-50/25 pt-4">
-          <ul className="flex flex-wrap gap-x-1 gap-y-2" aria-label="Choose a place">
+        <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-birch-50/25 pt-5 md:mt-24">
+          <AnimatePresence mode="wait" initial={false}>
+            <m.p
+              key={place.id}
+              aria-live="off"
+              className="font-sans text-[0.9375rem] text-birch-50/90 [&_em]:not-italic [&_em]:text-birch-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.6, ease: EASE }}
+            >
+              <Sentence name={place.name} times={times} />
+            </m.p>
+          </AnimatePresence>
+          <ul className="flex flex-wrap gap-x-1 gap-y-2 md:ml-auto" aria-label="Choose a place">
             {liveLightPlaceIds.map((id, i) => (
               <li key={id}>
                 <button
                   type="button"
                   onClick={() => choose(i)}
                   aria-pressed={i === index}
-                  className="meta border border-transparent px-2.5 py-1.5 text-birch-50/80 transition-colors duration-500 hover:text-birch-50 aria-pressed:border-birch-50/60 aria-pressed:text-birch-50"
+                  className="meta border-b border-transparent px-2 py-1.5 text-birch-50/70 transition-colors duration-500 hover:text-birch-50 aria-pressed:border-birch-50 aria-pressed:text-birch-50"
                 >
                   {getPlace(id).name}
                 </button>
               </li>
             ))}
+            {!reduceMotion && (
+              <li>
+                <button type="button" onClick={() => setPaused((p) => !p)} className="meta px-2 py-1.5 text-birch-50/70 hover:text-birch-50">
+                  {paused ? "▶ Play" : "❚❚ Pause"}
+                  <span className="sr-only"> rotating places</span>
+                </button>
+              </li>
+            )}
           </ul>
-          {!reduceMotion && (
-            <button type="button" onClick={() => setPaused((p) => !p)} className="meta ml-auto px-2.5 py-1.5 text-birch-50/80 hover:text-birch-50">
-              {paused ? "▶ Play" : "❚❚ Pause"}
-              <span className="sr-only"> rotating places</span>
-            </button>
-          )}
         </div>
         <p className="sr-only" aria-live="polite">
           {announcement}
