@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/editorial/JsonLd";
 import { SunPath } from "@/components/horizon/SunPath";
 import { JourneyCard } from "@/components/journeys/JourneyCard";
-import { ScandinaviaMap } from "@/components/route/ScandinaviaMap";
 import { modeLabel } from "@/components/route/modes";
 import { Price } from "@/components/ui/Currency";
 import { ArrowLink, PillLink } from "@/components/ui/Links";
@@ -21,7 +20,6 @@ import { getPlace, type PlaceId } from "@/data/places";
 import { stays } from "@/data/stays";
 import { formatMonths, monthName } from "@/lib/format";
 import type { ImageRef, JourneyDay } from "@/types/content";
-import { planRoute } from "@/lib/routing";
 import { formatDuration, formatTime, getSunTimes, type LocalDate } from "@/lib/solar";
 
 export const dynamicParams = false;
@@ -84,7 +82,6 @@ export default async function JourneyPage({ params }: Props) {
   const year = new Date().getFullYear();
   const startDay = 10; // light is shown as if leaving on the 10th of the journey's month
   const sleeps = itinerary.days.map((d) => d.placeId).filter((id, i, all) => id !== all[i - 1]);
-  const plan = planRoute(sleeps, { flightFree: journey.flightFree, month: itinerary.defaultMonth });
   const enquire = `/enquire?journey=${journey.slug}`;
   const photos = dayImages(itinerary.days, image?.src);
   const related = journeys.filter((j) => j.slug !== journey.slug && j.bestMonths.some((m) => journey.bestMonths.includes(m))).slice(0, 3);
@@ -155,8 +152,15 @@ export default async function JourneyPage({ params }: Props) {
           </dl>
         </div>
         <div className="col-span-12 md:col-span-6 lg:col-span-6 lg:col-start-7">
-          <ScandinaviaMap stops={sleeps} legs={plan.segments.flatMap((s) => s.legs)} />
-          <p className="meta mt-3 text-stone">The route, roughly. Scenic legs in oak.</p>
+          <h2 className="eyebrow text-stone">Where you sleep, in order</h2>
+          <ol className="mt-4 border-t border-ink/15">
+            {sleeps.map((id, i) => (
+              <li key={`${id}-${i}`} className="flex items-baseline gap-4 border-b border-ink/10 py-3">
+                <span className="meta w-5 text-lingon">{i + 1}</span>
+                <span className="font-sans">{getPlace(id as PlaceId).name}</span>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 

@@ -2,7 +2,7 @@
 
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { GhostLink, PillLink } from "@/components/ui/Links";
+import { DottedLink, PillLink } from "@/components/ui/Links";
 import { Photo, preloadPhoto } from "@/components/ui/Photo";
 import { site } from "@/config/site";
 import { heroImages } from "@/data/media";
@@ -124,7 +124,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
 
       <div className="gutter pb-8 pt-40 md:pb-10">
         <p className="eyebrow text-birch-50/85">Private journeys through Scandinavia and Finland</p>
-        <h1 className="mt-6 max-w-5xl text-balance font-serif text-[clamp(3.25rem,1.5rem+7vw,9rem)] font-light leading-[0.92] tracking-[-0.03em]">
+        <h1 className="mt-6 max-w-5xl text-balance font-serif text-[clamp(2.75rem,1.6rem+3.6vw,5.25rem)] font-light leading-[0.95] tracking-[-0.03em]">
           The North, <em>slowly.</em>
           <span className="sr-only">
             {" "}
@@ -135,7 +135,7 @@ export function LiveLight({ initialNow }: { initialNow: number }) {
           <PillLink href="/journeys" className="px-7 py-3.5 text-base">
             Explore journeys
           </PillLink>
-          <GhostLink href="/enquire">Plan a journey</GhostLink>
+          <DottedLink href="/enquire" className="font-sans text-base text-birch-50">Plan a journey</DottedLink>
         </div>
 
         <div className="mt-16 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-birch-50/25 pt-5 md:mt-24">

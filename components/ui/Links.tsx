@@ -27,17 +27,15 @@ export function GhostLink({ className = "", children, ...props }: LinkProps) {
   );
 }
 
-/** Secondary action: a hairline label with a round arrow beside it. */
+/** Secondary action: a plain text link with an arrow (no boxed label or circle, owner rule). */
 export function ArrowLink({ className = "", children, ...props }: LinkProps) {
   return (
-    <Link {...props} className={`group inline-flex items-stretch font-mono text-xs uppercase tracking-[0.08em] ${className}`}>
-      <span className="flex items-center border border-current/60 px-4 py-2.5 transition-colors duration-500 ease-light group-hover:border-current">
-        {children}
-      </span>
-      <span
-        aria-hidden
-        className="-ml-px flex aspect-square items-center justify-center rounded-full border border-current/60 px-2.5 transition-transform duration-500 ease-light group-hover:translate-x-1 group-hover:border-current"
-      >
+    <Link
+      {...props}
+      className={`group inline-flex items-center gap-2 py-2 font-mono text-xs uppercase tracking-[0.08em] underline decoration-current/40 underline-offset-[6px] transition-colors duration-500 ease-light hover:decoration-current ${className}`}
+    >
+      {children}
+      <span aria-hidden className="transition-transform duration-500 ease-light group-hover:translate-x-1">
         →
       </span>
     </Link>

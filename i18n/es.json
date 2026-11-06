@@ -93,7 +93,6 @@
  "Travel": "Viajar",
  "Flight-free": "Sin avión",
  "Mostly rail and sea": "Sobre todo en tren y barco",
- "The route, roughly. Scenic legs in oak.": "La ruta, a grandes rasgos. Tramos panorámicos en color roble.",
  "Day by day": "Día a día",
  "The days,": "Los días,",
  "and the light on each.": "y la luz de cada uno.",
@@ -332,7 +331,6 @@
  "Travelling in": "Viajar en",
  "Any month": "Cualquier mes",
  "Your stops": "Sus paradas",
- "Pick two or more places on the map, or start from one of the slow routes below.": "Elija dos o más lugares en el mapa o empiece por una de las rutas lentas de abajo.",
  "Move {0} earlier": "Adelantar {0}",
  "Move {0} later": "Retrasar {0}",
  "Remove {0}": "Quitar {0}",
@@ -1576,5 +1574,7 @@
  "Choose your light.": "Elija su luz.",
  "The same fjord is a different journey in June and in January. We plan the season first, then everything else.": "El mismo fiordo es otro viaje en junio que en enero. Primero planificamos la estación y después todo lo demás.",
  "The North,": "El Norte,",
- "Explore journeys": "Descubrir los viajes"
+ "Explore journeys": "Descubrir los viajes",
+ "Where you sleep, in order": "Dónde duermes, en orden",
+ "Pick two or more places from the list, or start from one of the slow routes below.": "Elige dos o más lugares de la lista, o empieza por una de las rutas lentas de abajo."
 }

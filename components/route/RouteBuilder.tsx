@@ -14,7 +14,6 @@ import { useInitialUrlParams } from "@/lib/use-url-params";
 import { formatDuration } from "@/lib/solar";
 import type { ImageRef, Month } from "@/types/content";
 import { modeLabel } from "./modes";
-import { ScandinaviaMap } from "./ScandinaviaMap";
 
 const nameOf = (id: string) => places.find((p) => p.id === id)?.name ?? id;
 const known = new Set<string>(places.map((p) => p.id));
@@ -62,7 +61,7 @@ function PlaceList({ stops, onToggle }: { stops: string[]; onToggle: (id: string
 }
 
 /**
- * Pick places on the map (or from the list); the builder joins them by train, ferry, coastal ship or car.
+ * Pick places from the list; the builder joins them by train, ferry, coastal ship or car.
  * State lives in the URL so a route can be shared or sent to the enquiry form.
  */
 export function RouteBuilder({ routeImages }: { routeImages: Record<string, ImageRef | undefined> }) {
@@ -102,38 +101,8 @@ export function RouteBuilder({ routeImages }: { routeImages: Record<string, Imag
   return (
     <div className="grid-12 gap-y-10">
       <div className="col-span-12 lg:col-span-7">
-        <ScandinaviaMap stops={stops} legs={legs} onToggle={toggle} />
-        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2" aria-hidden>
-          {[
-            ["Train", undefined],
-            ["Ferry, ship", "6 5"],
-            ["Car, bus", "1.5 5"],
-            ["Flight", "2 8"],
-          ].map(([label, dash]) => (
-            <span key={label} className="meta flex items-center gap-2 text-stone">
-              <svg width="28" height="6">
-                <line x1="1" x2="27" y1="3" y2="3" stroke="currentColor" strokeWidth="2" strokeDasharray={dash} strokeLinecap="round" />
-              </svg>
-              {label}
-            </span>
-          ))}
-          <span className="meta flex items-center gap-2 text-oak-deep">
-            <svg width="28" height="6">
-              <line x1="1" x2="27" y1="3" y2="3" stroke="currentColor" strokeWidth="2" />
-            </svg>
-            Scenic
-          </span>
-        </div>
-
-        {/* On small screens the list is the main control; on large screens it sits behind a disclosure. */}
-        <div className="mt-8 border-t border-ink/15 pt-4 lg:hidden">
-          <p className="font-sans text-[0.9375rem]">Choose places</p>
-          <PlaceList stops={stops} onToggle={toggle} />
-        </div>
-        <details className="mt-8 hidden border-t border-ink/15 pt-4 lg:block">
-          <summary className="cursor-pointer font-sans text-[0.9375rem]">Choose places from a list</summary>
-          <PlaceList stops={stops} onToggle={toggle} />
-        </details>
+        <h2 className="font-sans text-[0.9375rem]">Choose places</h2>
+        <PlaceList stops={stops} onToggle={toggle} />
       </div>
 
       <div className="col-span-12 lg:col-span-5 lg:col-start-8">
@@ -171,7 +140,7 @@ export function RouteBuilder({ routeImages }: { routeImages: Record<string, Imag
 
         <h2 className="eyebrow mt-8 text-stone">Your stops</h2>
         {stops.length === 0 ? (
-          <p className="mt-4 text-stone">Pick two or more places on the map, or start from one of the slow routes below.</p>
+          <p className="mt-4 text-stone">Pick two or more places from the list, or start from one of the slow routes below.</p>
         ) : (
           <ol className="mt-4 space-y-2">
             {stops.map((id, i) => (
