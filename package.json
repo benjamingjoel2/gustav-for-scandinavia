@@ -13,7 +13,6 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:a11y": "playwright test",
-    "build:map": "tsx scripts/build-map.ts",
     "build:photos": "tsx scripts/build-photos.ts",
     "cf-build": "opennextjs-cloudflare build && cp cloudflare/_headers .open-next/assets/_headers",
     "cf-pages": "node scripts/cf-pages.mjs"
@@ -33,23 +32,17 @@
     "@opennextjs/cloudflare": "^1.20.15",
     "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4.3.3",
-    "@types/d3-geo": "^3.1.1",
     "@types/geojson": "^7946.0.16",
     "@types/mdx": "^2.0.14",
     "@types/node": "^26.6.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@types/topojson-client": "^3.1.5",
-    "@types/topojson-specification": "^1.0.5",
-    "d3-geo": "^3.1.1",
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.4.2",
     "tailwindcss": "^4.3.3",
-    "topojson-client": "^3.1.0",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vitest": "^5.0.5",
-    "world-atlas": "^2.0.2",
     "wrangler": "^4.156.0"
   }
 }

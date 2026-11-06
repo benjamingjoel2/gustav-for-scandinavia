@@ -14,7 +14,7 @@ export function Footer() {
         <Photo image={destinationImage("geirangerfjord")} sizes="100vw" className="-z-20" />
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-polar via-polar/45 to-polar/5" />
         <div className="gutter w-full pb-16 pt-32 md:pb-24">
-          <p className="headline max-w-4xl text-[clamp(3rem,1.5rem+6vw,7.5rem)] leading-[0.95]">
+          <p className="headline max-w-4xl text-[clamp(2.5rem,1.5rem+3vw,4.5rem)] leading-[1]">
             Follow the <em>light.</em>
           </p>
           <p className="mt-6 max-w-md font-sans text-lg leading-relaxed text-birch-50/85">

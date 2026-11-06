@@ -36,7 +36,7 @@ Everything marked `placeholder: true` (Black Book entries, stays) and the `[Plac
 
 ## Notes
 
-- **Map**: `components/route/map-data.ts` is generated from Natural Earth 1:50m (public domain) by `npm run build:map`.
+- **No maps**: the route builder and journey pages list places in order instead of drawing a map (owner rule, 6 Nov 2026).
 - **Enquiries** go to `app/api/enquiry/route.ts`, which validates and logs them. Connecting a CRM is a TODO there.
 - **Photos** are served from `public/photos`, not from Unsplash. After adding or changing a photo in `data/`, run `npm run build:photos` and commit the new files (`lib/photos.test.ts` fails until you do).
 - **Domain**: the site lives at https://gustav.tourground.com (DNS for tourground.com is on Vercel). `NEXT_PUBLIC_SITE_URL` overrides it.
