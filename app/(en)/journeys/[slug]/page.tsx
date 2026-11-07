@@ -110,7 +110,7 @@ export default async function JourneyPage({ params }: Props) {
           <p className="eyebrow col-span-12 text-birch-50/80">
             Journey · {journey.days} days{journey.flightFree ? " · Flight-free" : ""}
           </p>
-          <h1 className="col-span-12 font-sans text-title font-light md:col-span-9">{journey.title}</h1>
+          <h1 className="col-span-12 font-sans text-hero-title font-light md:col-span-9">{journey.title}</h1>
           <p className="lede col-span-12 max-w-2xl md:col-span-7">{journey.strapline}</p>
           <div className="col-span-12 mt-4 flex flex-wrap items-center gap-6">
             <PillLink href={enquire}>Start from this journey</PillLink>
