@@ -103,7 +103,7 @@ export default async function DestinationPage({ params }: Props) {
             </Link>{" "}
             · {destination.region}
           </p>
-          <h1 className="mt-4 font-sans text-title font-light">{destination.name}</h1>
+          <h1 className="mt-4 font-sans text-hero-title font-light">{destination.name}</h1>
           <p className="meta mt-6">
             {formatCoords(place.lat, place.lng)} · Best {formatMonths(destination.bestMonths)}
           </p>

@@ -23,7 +23,7 @@ export function EditorialPage({ eyebrow, title, lede, meta, children, aside, her
     <article className="pt-16 md:pt-[4.5rem]">
       <header className="gutter grid-12 gap-y-6 pb-12 pt-16 md:pt-24">
         <p className="eyebrow col-span-12 text-stone">{eyebrow}</p>
-        <h1 className="col-span-12 font-sans text-title font-light md:col-span-10">{title}</h1>
+        <h1 className="col-span-12 font-sans text-hero-title font-light md:col-span-10">{title}</h1>
         {lede && <p className="lede col-span-12 max-w-3xl text-ink/80 md:col-span-8">{lede}</p>}
         {meta && <div className="meta col-span-12 text-stone">{meta}</div>}
       </header>
